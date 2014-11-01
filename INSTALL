@@ -1,0 +1,28 @@
+=== Installation Instruction ===
+
+1. Copy all the files to your root webserver usually /var/www/
+
+2. Set your webserver DocumentRoot to public folder
+    /var/www
+    /var/www/application
+    /var/www/daemons
+    /var/www/public -> you MUST set this to your DocumentRoot path (e.g. /var/www/html)
+    /var/www/schema
+    /var/www/scripts
+    /var/www/tests
+
+3. Dump schema/wellhealthbook.sql followed by schema/wellhealthbook-data.sql
+4. Open application/config/app.ini with your favorite text editor and edit:
+    a. database.params.host
+        usually localhost
+    b. database.params.dbname
+        set this to whatever database name you have
+    c. database.params.username
+        database username like root
+    d. database.params.password
+        database password for username in the preceding config.
+5. Open up your favorite browser, most recommended latest version of Firefox, and navigate to http://localhost or whatever your website domain
+6. Login using admin as username and admin as password
+7. Once login, head over to Admin tab, select Enumeration Manager, and click Regenerate toolbar button
+8. Refresh your browser and enjoy.
+
