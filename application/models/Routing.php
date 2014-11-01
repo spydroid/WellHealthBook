@@ -34,9 +34,10 @@ class Routing extends WebVista_Model_ORM {
 	var $checkInTimestamp	= '';
 
 	protected $_table = "routing";
-        protected $_primaryKeys = array("routingId");
+    protected $_primaryKeys = array("routingId");
 
-	const ENUM_PARENT_NAME = 'Routing Preferences';
+    const ENUM_PARENT_NAME = 'Routing Preferences';
+    const ENUM_PARENT_KEY = 'ROUTING';
 
 	public function populateByAppointments() {
 		$db = Zend_Registry::get('dbAdapter');

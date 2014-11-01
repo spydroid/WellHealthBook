@@ -54,6 +54,7 @@ class EnumGenerator {
 		self::generateTextOnlyTypesEnum($force);
 		self::generateEobAdjustmentTypesEnum($force);
 		self::generateChargeTypesEnum($force);
+        self::generateRoutingPreferencesEnum($force);
 	}
 
 	public static function generateDemographicsPreferencesEnum($force = false) {
@@ -905,8 +906,8 @@ class EnumGenerator {
 					'importLabHL7' => array('key' => 'IMPORTLAB', 'name' => 'Import Lab HL7', 'active' => 1, 'guid' => 'd8776b4a-743b-4d4c-81d1-9eaa23471972'),
 					'appointmentHistory' => array('key' => 'APPHISTORY', 'name' => 'Appointment History', 'active' => 1, 'guid' => 'ad390c48-e73b-4834-aa14-f54a72a5dc95'),
 					'patientAccount' => array('key' => 'PATIENTACC', 'name' => 'Patient Account', 'active' => 1, 'guid' => '8c13cad0-ff49-442b-94d3-f9169a0d4e85'),
-					'unallocatedPayment' => array('key' => 'UNALLOCPAY', 'name' => 'Unallocated Payment', 'active' => 1, 'guid' => 'c6e2259b-b659-44c2-8bd4-33ecd7f4da1a'),
-					'manualJournal' => array('key' => 'MANJOURNAL', 'name' => 'Manual Journal', 'active' => 1, 'guid' => '2087ff6d-0140-478c-8ff2-57f6b0429151'),
+                    //'unallocatedPayment' => array('key' => 'UNALLOCPAY', 'name' => 'Unallocated Payment', 'active' => 1, 'guid' => 'c6e2259b-b659-44c2-8bd4-33ecd7f4da1a'),
+                    //'manualJournal' => array('key' => 'MANJOURNAL', 'name' => 'Manual Journal', 'active' => 1, 'guid' => '2087ff6d-0140-478c-8ff2-57f6b0429151'),
 				)),
 			);
 
@@ -3158,5 +3159,42 @@ Highest urgency allowed: ASAP','active'=>1,'guid'=>''),
 		$enumerationIterator = $enumerationsClosure->getAllDescendants($enumeration->enumerationId,1);
 		return $enumerationIterator->toJsonArray('enumerationId',array('name'));
 	}
+
+    public static function generateRoutingPreferencesEnum($force = false)
+    {
+        $ret = false;
+        do {
+            $name = Routing::ENUM_PARENT_NAME;
+            $key = Routing::ENUM_PARENT_KEY;
+            $enumeration = new Enumeration();
+            $enumeration->populateByUniqueName($name);
+            // check for key existence
+            if (strlen($enumeration->key) > 0 && $enumeration->key == $key) {
+                if (!$force) {
+                    break;
+                }
+                $enumerationClosure = new EnumerationsClosure();
+                $enumerationClosure->deleteEnumeration($enumeration->enumerationId);
+            }
+
+            $enums = array(
+                array('key'=>'GRT','name'=>'General Route','active'=>1,'guid'=>'5592d265-c66b-4bba-9a25-a7bc44ae0ded'),
+            );
+
+            $level = array();
+            $level['guid'] = 'e52c089c-0ceb-453f-899b-8548832928d4';
+            $level['key'] = $key;
+            $level['name'] = $name;
+            $level['category'] = 'System';
+            $level['active'] = 1;
+            $level['data'] = $enums;
+
+            $data = array($level);
+
+            self::_saveEnumeration($data);
+            $ret = true;
+        } while(false);
+        return $ret;
+    }
 
 }

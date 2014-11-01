@@ -438,16 +438,16 @@ class Menu {
 		$mainTabs['Labs']['hrefMode'] =  'ajax-html';
 		$mainTabs['Orders']['url']   = $baseUrl.'/orders.raw';
 		$mainTabs['Orders']['hrefMode'] =  'ajax-html';
-		$mainTabs['Claims']['url']   = $baseUrl.'/claims.raw';
-		$mainTabs['Claims']['hrefMode'] =  'ajax-html';
-		$mainTabs['A/R']['url']   = $baseUrl.'/accounts.raw';
-		$mainTabs['A/R']['hrefMode'] =  'ajax-html';
+        //$mainTabs['Claims']['url']   = $baseUrl.'/claims.raw';
+        //$mainTabs['Claims']['hrefMode'] =  'ajax-html';
+        //$mainTabs['A/R']['url']   = $baseUrl.'/accounts.raw';
+        //$mainTabs['A/R']['hrefMode'] =  'ajax-html';
 		$mainTabs['Reports']['url']   = $baseUrl.'/reports.raw';
 		$mainTabs['Reports']['hrefMode'] =  'ajax-html';
 		//$mainTabs['Billing']['url']   = '/index.php/minimal/claim/list';
 		//$mainTabs['Billing']['hrefMode'] =  'iframe';
-		$mainTabs['Messaging']['url']   = $baseUrl.'/messaging.raw';
-		$mainTabs['Messaging']['hrefMode'] =  'ajax-html';
+        //$mainTabs['Messaging']['url']   = $baseUrl.'/messaging.raw';
+        //$mainTabs['Messaging']['hrefMode'] =  'ajax-html';
 		$mainTabs['Admin']['url']   = $baseUrl.'/admin.raw';
 		$mainTabs['Admin']['hrefMode'] =  'ajax-html';
 

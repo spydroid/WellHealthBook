@@ -9,8 +9,8 @@ div.dataForeground:hover {
 </style>
 
 <div id="stylesContainerId" style="display:none;height:0px;"><style></style></div>
-<div id="viewDayContainer" style="height:1000px;">
-	<div id="timeColumnContainer" style="float:left;width:80px;height:1000px;"></div>
+<div id="viewDayContainer" style="height:1100px;">
+	<div id="timeColumnContainer" style="float:left;width:80px;height:1100px;"></div>
 	<div id="scheduleColumnContainer" style="width:auto;overflow:auto;">
 		<div id="scheduleContainer"></div>
 	</div>
@@ -276,7 +276,7 @@ function shrinkAppointment(appointmentId,obj,height,zIndex) {
 	function createColumn(columnIndex) {
 		var newDiv = document.createElement('div');
 		newDiv.setAttribute('id',"eventColumn"+columnIndex+"Container");
-		newDiv.setAttribute('style',"float:left;width:250px;height:1000px;");
+		newDiv.setAttribute('style',"float:left;width:250px;height:1100px;");
 		var parentDiv = dojo.byId('scheduleContainer');
 		parentDiv.appendChild(newDiv);
 

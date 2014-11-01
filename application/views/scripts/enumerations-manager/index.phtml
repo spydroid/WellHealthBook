@@ -92,8 +92,6 @@ enumLayout.setEffect('collapse',true);
 enumLayout.setEffect("resize", true);
 
 function enumHideNecessaryToolbars() {
-	enumLeftToolbar.disableItem("tbNewObject");
-	enumLeftToolbar.hideItem("tbNewObject");
 	enumLeftToolbar.disableItem("tbEditObject");
 	enumLeftToolbar.hideItem("tbEditObject");
 }
@@ -118,9 +116,30 @@ function enumOnToolbarClicked(id) {
 		case "refresh":
 			enumUpdateListGrid();
 			break;
+        case "regenerate":
+            enumerationRegenerate();
+            break;
 		default:
 			alert('<?=__("Invalid event: ")?>'+id);
 	}
+}
+
+function enumerationRegenerate() {
+    if (!confirm("<?=__('Are you sure you want to regenerate enumeration?')?>\n\n<?=__('WARNING: This will override all enumerations and their respective children recursively.')?>")) return;
+    dojo.xhrPost({
+        url: "<?=$this->baseUrl?>/enumerations-manager.raw/process-regenerate",
+        handleAs: "json",
+        content: {
+        },
+        load: function (data) {
+            if (typeof(data.msg) != 'undefined') alert(data.msg);
+            enumUpdateListGrid();
+        },
+        error: function (error) {
+            alert(error);
+            console.error("Error: ",error);
+        }
+    });
 }
 
 function enumerationDelete(enumerationId,grid) {
@@ -167,7 +186,7 @@ function enumReloadRightPane(id) {
 		url: "<?=$this->baseUrl?>/enumerations-manager.raw/view?enumerationId=" + id,
 		handleAs: "text",
 		load: function (data) {
-			dojo.setInnerHTML(dojo.byId("enumRightPane"),data);
+            WHB_Util.setInnerHTMLDojo(dojo.byId("enumRightPane"), data);
 		},
 		error: function (error) {
 			console.error ('Error: ', error);

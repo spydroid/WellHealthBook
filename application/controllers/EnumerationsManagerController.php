@@ -340,5 +340,16 @@ class EnumerationsManagerController extends WebVista_Controller_Action {
 		$this->_helper->autoCompleteDojo($matches);
 	}
 
+
+    public function processRegenerateAction()
+    {
+        EnumGenerator::generateTestData(true);
+        $data = array();
+        $data['msg'] = __("Enumerations regenerated successfully");
+        $json = Zend_Controller_Action_HelperBroker::getStaticHelper('json');
+        $json->suppressExit = true;
+        $json->direct($data);
+    }
+
 }
 

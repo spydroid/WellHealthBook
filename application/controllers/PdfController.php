@@ -40,11 +40,11 @@ class PdfController extends WebVista_Controller_Action {
 		//'ff560b50-75d0-11de-8a39-0800200c9a66' uuid for prescription pdf
 		$attachment->populateWithAttachmentReferenceId();
 		$db = Zend_Registry::get('dbAdapter');
-                $sql = "select data from attachmentBlobs where attachmentId = " . $attachment->attachmentId;
-                $stmt = $db->query($sql);
-                $row = $stmt->fetch();
-                $this->view->pdfBase64 = base64_encode($row['data']);
-                $stmt->closeCursor();
+        $sql = "select data from attachmentBlobs where attachmentId = " . (int)$attachment->attachmentId;
+        $stmt = $db->query($sql);
+        $row = $stmt->fetch();
+        $this->view->pdfBase64 = base64_encode($row['data']);
+        $stmt->closeCursor();
 		$this->view->xmlData = $xmlData;
 		header('Content-type: application/vnd.adobe.xfdf');
 	}
