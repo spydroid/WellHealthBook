@@ -90,7 +90,7 @@ var listCharts = {
 			},
 		<?endforeach;?>
 		},
-		"vitalSigns": (<r><![CDATA[<?=$value['vitalSigns']?>]]></r>).toString(),
+		"vitalSigns": <?=json_encode($value['vitalSigns'])?>
 	},
 <?endforeach;?>
 };

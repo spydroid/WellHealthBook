@@ -76,7 +76,7 @@ function DCMProcessEdit(rowId,cellIndex,newValue,oldValue) {
 		content: {
 			"dashboardComponentId": rowId,
 			"field": DCMColFields[cellIndex],
-			"value": newValue,
+            "value": newValue
 		},
 		load: function (data) {
 			if (data.error) {

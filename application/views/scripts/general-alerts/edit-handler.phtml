@@ -34,9 +34,9 @@
 <div class="formRow" style="padding-top:4px;">
 	<?=$this->form->handlerObject->renderLabel()?>
 	<script>
-	var gaHandlerObject = (<r><![CDATA[<?=$this->form->handlerObject->getValue()?>]]></r>).toString();
-	var gaDatasource = (<r><![CDATA[<?=$this->form->datasource->getValue()?>]]></r>).toString();
-	var gaTemplate = (<r><![CDATA[<?=$this->form->template->getValue()?>]]></r>).toString();
+	var gaHandlerObject = <?=json_encode($this->form->handlerObject->getValue())?>;
+	var gaDatasource = <?=json_encode($this->form->datasource->getValue())?>;
+	var gaTemplate = <?=json_encode($this->form->template->getValue())?>;
 	function gaHandlerEditCode(code) {
 		var handlerName = dojo.byId("handler-name").value;
 		if (handlerName == "") {

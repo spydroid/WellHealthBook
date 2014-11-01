@@ -197,7 +197,7 @@ dojo.connect(pscb,"onChange",function(arg){
 		url: "<?=$this->baseUrl?>/patient.raw/get-details",
 		handleAs: "json",
 		content: {
-			"personId": subscriber.value,
+            "personId": subscriber.value
 		},
 		load: function(data) {
 			if (!data) return;

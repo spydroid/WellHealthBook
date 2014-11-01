@@ -139,7 +139,7 @@ function educationRemoveSelected(rowId) {
 		url: "<?=$this->baseUrl?>/educations.raw/process-delete-education",
 		handleAs: "json",
 		content: {
-			"code": rowId,
+            "code": rowId
 		},
 		load: function (data) {
 			educationListGridReload();

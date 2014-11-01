@@ -441,7 +441,7 @@ function shrinkAppointment(appointmentId,obj,height,zIndex) {
 			url: "<?=$this->baseUrl?>/calendar.raw/ajax-remove-column",
 			handleAs: "json",
 			content: {
-				id: columnId,
+                id: columnId
 			},
 			load: function (data) {
 				if (data.ret) {
@@ -504,7 +504,7 @@ function shrinkAppointment(appointmentId,obj,height,zIndex) {
 				dojo.xhrPost({
 					url: "<?=$this->baseUrl?>/appointment.raw/process-create-visit",
 					content: {
-						"appointmentId": appointmentId,
+                        "appointmentId": appointmentId
 					},
 					handleAs: "json",
 					load: function(responseObject,ioArgs){
@@ -711,7 +711,7 @@ function shrinkAppointment(appointmentId,obj,height,zIndex) {
 				handleAs: "json",
 				content: {
 					appointmentId: appointmentId,
-					columnId: columnId,
+                    columnId: columnId
 				},
 				load: function (data) {
 					gridTo.cells(idTo,colIndexTo).setValue(gridTo.cells(idTo,colIndexTo).getValue()+' <div style="margin-top:'+marginTop+';margin-left:30px;">'+imageCopy+'<div style="margin-left:'+marginLeft+'">'+valFrom+'</div></div>');
@@ -1001,7 +1001,7 @@ function appointmentUpdate(idFrom,idTo,columnIdFrom,columnIdTo,timeTo,isCopy,for
 			"columnIdTo": columnIdTo,
 			"timeTo": timeTo,
 			"isCopy": isCopy,
-			"forced": forced,
+            "forced": forced
 		},
 		load: function (data) {
 			if (data.error) {

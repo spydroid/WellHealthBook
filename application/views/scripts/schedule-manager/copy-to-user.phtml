@@ -127,7 +127,7 @@ function copyToUserStartRemove(start,end,providerId,roomId) {
 			"dateStart": dateStartCopy.getFullYear() + "-" + (dateStartCopy.getMonth() + 1) + "-" + dateStartCopy.getDate(),
 			"dateEnd": dateEndCopy.getFullYear() + "-" + (dateEndCopy.getMonth() + 1) + "-" + dateEndCopy.getDate(),
 			"providerId": providerId,
-			"roomId": roomId,
+            "roomId": roomId
 		},
 		load: function (data) {
 			var scheduleCopyToUserProgress = dojo.byId("scheduleCopyToUserProgressId");
@@ -152,7 +152,7 @@ function copyToUserStartAdd(start,end,providerId,roomId) {
 			"dateStart": dateStartCopy.getFullYear() + "-" + (dateStartCopy.getMonth() + 1) + "-" + dateStartCopy.getDate(),
 			"dateEnd": dateEndCopy.getFullYear() + "-" + (dateEndCopy.getMonth() + 1) + "-" + dateEndCopy.getDate(),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			var scheduleCopyToUserProgress = dojo.byId("scheduleCopyToUserProgressId");
@@ -184,7 +184,7 @@ function copyToUserRemove(start,end,providerId,roomId) {
 			"dateStart": start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate(),
 			"dateEnd": end.getFullYear() + "-" + (end.getMonth() + 1) + "-" + end.getDate(),
 			"providerId": providerId,
-			"roomId": roomId,
+            "roomId": roomId
 		},
 		load: function (data) {
 			var remObj = dojo.byId("remCtr"+providerId+""+roomId+"Id");
@@ -223,7 +223,7 @@ function copyToUserAdd(start,end,providerId,roomId) {
 			"providerIdTo": providerId,
 			"roomIdTo": roomId,
 			"providerIdFrom": globProviderId,
-			"roomIdFrom": globRoomId,
+            "roomIdFrom": globRoomId
 		},
 		load: function (data) {
 			var addObj = dojo.byId("addCtr"+providerId+""+roomId+"Id");

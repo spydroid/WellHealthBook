@@ -58,7 +58,7 @@ function outboundFaxResend() {
 		handleAs: "json",
 		content: {
 			"messagingId": "<?=$this->messaging->messagingId?>",
-			"faxNumber": faxNumber,
+            "faxNumber": faxNumber
 		},
 		load: function (data) {
 			//alert(data.msg);

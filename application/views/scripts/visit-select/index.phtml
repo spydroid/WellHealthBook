@@ -265,7 +265,7 @@ function visitSelectSetMostRecentVisit(visitId) {
 		handleAs: "json",
 		content: {
 			"personId": mainController.getActivePatient(),
-			"visitId": visitId,
+            "visitId": visitId
 		},
 		load: function (data) {
 			mainController.setActiveVisit(visitId);
@@ -315,7 +315,7 @@ function visitProcessSaveAndClose() {
 		url: globalBaseUrl + "/claims.raw/check-rules",
 		handleAs: "json",
 		content: {
-			"visitId": visitId,
+            "visitId": visitId
 		},
 		load: function(data) {
 			if (data.event) {

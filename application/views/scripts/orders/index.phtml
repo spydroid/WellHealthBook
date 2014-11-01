@@ -41,7 +41,6 @@ var filters = {
 		{"id":"current","data":['Current Orders (Active & Pending status only)']},
 		{"id":"expiring","data":['Expiring Orders']},
 		{"id":"unsigned","data":['Unsigned Orders']}
-		/*{"id":"recently_expired","data":[(<r><![CDATA[ <?=__('Recently Expired Orders')?> ]]></r>).toString()]},*/
 	]
 };
 orderFilterGrid.parse(filters,"json");
@@ -66,7 +65,6 @@ orderWriteGrid.init();
 
 var writeOrders = {
 	"rows": [
-		/*{"id":"common-orders","data":[(<r><![CDATA[ <?=__('Common Orders')?> ]]></r>).toString()]},*/
 		{"id":"lab-test","data":['Lab Test']},
 		{"id":"imaging","data":['Imaging']},
 		{"id":"text-order","data":['Text Only Order']}
@@ -211,7 +209,7 @@ function orderProcess(action,rowId) {
 		url: "<?=$this->baseUrl?>/orders.raw/process-"+action,
 		handleAs: "json",
 		content: {
-			"orderId": rowId
+            "orderId": rowId
 		},
 		load: function (data) {
 			orderListGridReload();

@@ -57,7 +57,7 @@
 				content: {
 					"definition[clinicalNoteDefinitionId]": rowId,
 					"definition[title]": newValue,
-					"definition[clinicalNoteTemplateId]": '<?=$this->form->clinicalNoteTemplateId->getValue()?>',
+                    "definition[clinicalNoteTemplateId]": '<?=$this->form->clinicalNoteTemplateId->getValue()?>'
 				},
 				load: function (data) {
 					if (data.code != '200') {
@@ -101,7 +101,7 @@
 			handleAs: "json",
 			content: {
 				"definition[title]": title,
-				"definition[clinicalNoteTemplateId]": '<?=$this->form->clinicalNoteTemplateId->getValue()?>',
+                "definition[clinicalNoteTemplateId]": '<?=$this->form->clinicalNoteTemplateId->getValue()?>'
 			},
 			load: function (data) {
 				if (data.code == '200') {
@@ -127,7 +127,7 @@
 			url: '<?=$this->baseUrl?>/clinical-notes-manager.raw/ajax-process-delete-definition',
 			handleAs: "json",
 			content: {
-				clinicalNoteDefinitionId: cndId,
+                clinicalNoteDefinitionId: cndId
 			},
 			load: function (data) {
 				if (data.code == '200') {

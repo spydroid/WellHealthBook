@@ -98,7 +98,7 @@ function populateVisitList(patientId) {
 	dojo.xhrGet({
 		url: "<?=$this->baseUrl?>/visit-select.raw/list-visits",
 		content: {
-			"personId": patientId,
+            "personId": patientId
 		},
 		handleAs: "json",
 		load: function (data) {
@@ -131,7 +131,7 @@ function populateVisitList(patientId) {
 	dojo.xhrGet({
 		url: "<?=$this->baseUrl?>/patient.raw/list-insurers",
 		content: {
-			"patientId": patientId,
+            "patientId": patientId
 		},
 		handleAs: "json",
 		load: function (data) {
@@ -168,7 +168,7 @@ function populateClaimLineList(visitId,payerId) {
 		url: "<?=$this->baseUrl?>/accounts.raw/list-claim-lines",
 		content: {
 			"visitId": visitId,
-			"payerId": payerId,
+            "payerId": payerId
 		},
 		handleAs: "json",
 		load: function (data) {

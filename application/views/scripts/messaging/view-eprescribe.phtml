@@ -45,7 +45,7 @@ function ePrescribeSetPON() {
 		content: {
 			"personId": dojo.byId("personId").value,
 			"messagingId": "<?=$this->messaging->messagingId?>",
-			"medicationId": medicationSelect.options[selectedIndex].value,
+            "medicationId": medicationSelect.options[selectedIndex].value
 		},
 		load: function(data) {
 			dhxWins.window("winEPrescribeId").close();
@@ -74,7 +74,7 @@ function patientLoadMedications(personId) {
 		url: "<?=$this->baseUrl?>/medications.raw/list-medications",
 		handleAs: "json",
 		content: {
-			"personId": personId,
+            "personId": personId
 		},
 		load: function(data) {
 			dojo.byId("personId").value = personId;

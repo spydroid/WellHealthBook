@@ -60,7 +60,7 @@ function ppDelete(id) {
 		handleAs: "json",
 		content: {
 			"personId": "<?=$this->personId?>",
-			"id": id,
+            "id": id
 		},
 		load: function (data) {
 			patientPicturesReload();
@@ -81,7 +81,7 @@ function ppSetActivePicture(id) {
 		handleAs: "json",
 		content: {
 			"personId": "<?=$this->personId?>",
-			"id": id,
+            "id": id
 		},
 		load: function (data) {
 			patientPicturesReload();

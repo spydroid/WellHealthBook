@@ -18,7 +18,7 @@ function teamOnSelected(teamId) {
 		handleAs: "json",
 		content: {
 			"teamId": teamId,
-			"patientId": mainController.getActivePatient(),
+            "patientId": mainController.getActivePatient()
 		},
 		load: function (data) {
 			initMainToolbar(null,mainController.getActivePatient());
@@ -78,7 +78,7 @@ function externalTeamSingleUpdate(id,field,value,callback) {
 			personId: mainController.getActivePatient(),
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -98,7 +98,7 @@ function externalTeamRemove(id,callback) {
 		handleAs: "json",
 		content: {
 			personId: mainController.getActivePatient(),
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			if (typeof callback == "function") {

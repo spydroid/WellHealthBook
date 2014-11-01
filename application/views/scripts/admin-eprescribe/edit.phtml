@@ -8,7 +8,7 @@ function enableEPrescribing() {
 		content: {
 			"dateActiveStart": dojo.byId("<?=$this->form->dateActiveStart->getId()?>").value,
 			"dateActiveEnd": dojo.byId("<?=$this->form->dateActiveEnd->getId()?>").value,
-			"serviceLevel": dojo.byId("<?=$this->form->serviceLevel->getId()?>").value,
+            "serviceLevel": dojo.byId("<?=$this->form->serviceLevel->getId()?>").value
 		},
 		handleAs: "json",
 		load: function (data) {

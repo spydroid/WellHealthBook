@@ -95,7 +95,7 @@ function enumItemsDragHandler(idFrom,idTo,gridFrom,gridTo,colIndexFrom,colIndexT
 		handleAs: "json",
 		content: {
 			idFrom: idFrom,
-			idTo: idTo,
+            idTo: idTo
 		},
 		load: function (data) {
 			enumItemsReloadGrid();
@@ -165,7 +165,7 @@ function import2xFacilities(parentId) {
 		handleAs: "json",
 		content: {
 			"import": "1",
-			"parentId": parentId,
+            "parentId": parentId
 		},
 		load: function (data) {
 			enumItemsReloadGrid();

@@ -57,7 +57,7 @@ function addedNewNote(clinicalNoteId) {
 		handleAs: "json",
 		content: {
 			"attachmentId": "<?=$this->attachment->attachmentId?>",
-			"attachmentReferenceId": clinicalNoteId,
+            "attachmentReferenceId": clinicalNoteId
 		},
 		load: function (data) {
 			//alert(data.msg);

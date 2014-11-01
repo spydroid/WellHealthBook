@@ -118,7 +118,7 @@ function calendarProcessMakeAppointment(forced,callbackId) {
 		url: "<?=$this->form->getAction()?>",
 		form: "<?=$this->form->getId()?>",
 		content: {
-			"forced": (forced)?"1":"0",
+            "forced": (forced)?"1":"0"
 		},
 		handleAs: "json",
 		load: function (data) {
@@ -348,7 +348,7 @@ function pNotesProcessEdit(id,field,value,type,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == "function") {

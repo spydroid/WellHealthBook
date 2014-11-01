@@ -54,7 +54,7 @@ function claimChangePayer() {
 		handleAs: "json",
 		content: {
 			"visitId": "<?=$this->visitId?>",
-			"payerId": payerId,
+            "payerId": payerId
 		},
 		load: function (data) {
 			visitTypeGetContent("claim"); // page reloads
@@ -238,7 +238,7 @@ claimFeeGrid.attachEvent("onSubGridCreated",function(sub1grid,rowId,rowIndex,con
 					content: {
 						"code": rowId,
 						"id": sub1RowId,
-						"state": checked,
+                        "state": checked
 					},
 					load: function (data) {
 						if (data != true) {
@@ -278,7 +278,7 @@ claimFeeGrid.attachEvent("onSubGridCreated",function(sub1grid,rowId,rowIndex,con
 					content: {
 						"claimId": sub1RowId,
 						"from": idFrom,
-						"to": idTo,
+                        "to": idTo
 					},
 					load: function (data) {
 						if (data != true) {

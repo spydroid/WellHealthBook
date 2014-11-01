@@ -110,7 +110,7 @@ function messagingGridOnContextMenu(item,rowId) {
 			handleAs: "json",
 			content: {
 				"messagingId": messagingId,
-				"code": code,
+                "code": code
 			},
 			load: function (data) {
 				messagingGridReload();
@@ -141,7 +141,7 @@ function messagingGridOnContextMenu(item,rowId) {
 				url: "<?=$this->baseUrl?>/messaging.raw/process-mark-resolved",
 				handleAs: "json",
 				content: {
-					"messagingId": messagingId,
+                    "messagingId": messagingId
 				},
 				load: function (data) {
 					messagingGridReload();

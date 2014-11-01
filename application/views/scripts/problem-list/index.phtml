@@ -73,7 +73,7 @@ function annotateProblem(id) {
 		url: '<?=$this->baseUrl?>/problem-list.raw/ajax-annotate',
 		content: {
 			problemListId: id,
-			comment: comment,
+            comment: comment
 		},
 		load: function (data) {
 			filterRowSelectHandler(previousFilterRowId,previousFilterCellIndex);
@@ -251,7 +251,7 @@ function plSetFlags(rowId,flags) {
 		url: "<?=$this->baseUrl?>/problem-list.raw/process-set-flags",
 		content: {
 			"problemListId": rowId,
-			"flags": flags,
+            "flags": flags
 		},
 		load: function (data) {
 			filterRowSelectHandler(previousFilterRowId,previousFilterCellIndex);

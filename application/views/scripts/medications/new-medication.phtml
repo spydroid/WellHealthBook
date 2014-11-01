@@ -281,7 +281,7 @@ function transmitMedPost(forced) {
                 url: '<?=$this->baseUrl?>/medications.raw/process-add-medication',
 		handleAs: 'json',
 		content: {
-			"forced": forced,
+            "forced": forced
 		},
                 form: 'addMedicationForm',
                 load: function (data){

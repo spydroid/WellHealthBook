@@ -166,7 +166,7 @@ function pdSingleUpdate(id,field,value,type,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -187,7 +187,7 @@ function pdRemove(id,type,callback) {
 		content: {
 			personId: '<?=$this->form->personId->getValue()?>',
 			type: type,
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -231,7 +231,7 @@ function patDetailsSingleUpdate(id,field,value,type,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -252,7 +252,7 @@ function patDetailsRemove(id,type,callback) {
 		content: {
 			personId: '<?=$this->form->personId->getValue()?>',
 			type: type,
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -350,7 +350,7 @@ patDetailsPhonesGrid.attachEvent("onDrag",function(idFrom,idTo,gridFrom,gridTo,c
 		handleAs: "json",
 		content: {
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			patDetailsPhonesGridReload();
@@ -459,7 +459,7 @@ patDetailsAddrGrid.attachEvent("onDrag",function(idFrom,idTo,gridFrom,gridTo,col
 		handleAs: "json",
 		content: {
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			patDetailsAddrGridReload();
@@ -596,7 +596,7 @@ pdInsurersGrid.attachEvent("onDrag",function(idFrom,idTo,gridFrom,gridTo,colInde
 		handleAs: "json",
 		content: {
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			pdInsurersGridReload();
@@ -675,7 +675,7 @@ function pdStatsEdit(name,value) {
 		content: {
 			"personId": "<?=$this->form->personId->getValue()?>",
 			"name": name,
-			"value": value,
+            "value": value
 		},
 		load: function (data) {
 			if (!data) {
@@ -754,9 +754,7 @@ pdStatsGrid.attachEvent("onRowDblClicked",function(rowId,cellIndex){
 	globalPDStatsId = rowId;
 	switch (pdStatsGrid.getUserData(rowId,"type")) {
 		case "<?=PatientStatisticsDefinition::TYPE_ENUM?>":
-			pdStatsPanel.innerHTML = (<r><![CDATA[
-				<select name="pdStatsTypeEnumId" id="pdStatsTypeEnumId"></select>
-			]]></r>).toString();
+            pdStatsPanel.innerHTML = <?=json_encode('<select name="pdStatsTypeEnumId" id="pdStatsTypeEnumId"></select>')?>;
 			var enumSelect = dojo.byId("pdStatsTypeEnumId");
 			enumSelect.length = 0;
 			var ctr = 0;
@@ -770,22 +768,16 @@ pdStatsGrid.attachEvent("onRowDblClicked",function(rowId,cellIndex){
 			enumSelect.selectedIndex = selectedIndex;
 			break;
 		case "<?=PatientStatisticsDefinition::TYPE_INPUT?>":
-			pdStatsPanel.innerHTML = (<r><![CDATA[
-				<input type="text" name="pdStatsTypeInputId" id="pdStatsTypeInputId" />
-			]]></r>).toString();
+            pdStatsPanel.innerHTML = <?=json_encode('<input type="text" name="pdStatsTypeInputId" id="pdStatsTypeInputId" />')?>;
 			dojo.byId("pdStatsTypeInputId").value = statsValue;
 			break;
 		case "<?=PatientStatisticsDefinition::TYPE_CHECKBOX?>":
-			pdStatsPanel.innerHTML = (<r><![CDATA[
-				<input type="checkbox" name="pdStatsTypeCheckboxId" id="pdStatsTypeCheckboxId" />
-			]]></r>).toString();
+            pdStatsPanel.innerHTML = <?=json_encode('<input type="checkbox" name="pdStatsTypeCheckboxId" id="pdStatsTypeCheckboxId" />')?>;
 			dojo.byId("pdStatsTypeCheckboxId").checked = (statsValue == "1")?true:false;
 			dojo.byId("pdStatsTypeCheckboxId").value = statsValue;
 			break;
 		case "<?=PatientStatisticsDefinition::TYPE_DATE?>":
-			pdStatsPanel.innerHTML = (<r><![CDATA[
-				<input type="text" name="pdStatsTypeDateId" id="pdStatsTypeDateId" />
-			]]></r>).toString();
+            pdStatsPanel.innerHTML = <?=json_encode('<input type="text" name="pdStatsTypeDateId" id="pdStatsTypeDateId" />')?>;
 			pdStatsBuildDatePicker(statsValue);
 			break;
 		default:

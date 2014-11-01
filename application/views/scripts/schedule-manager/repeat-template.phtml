@@ -101,7 +101,7 @@ function repeatTemplateOnSaved() {
 			"dateStart": dateStartFrom,
 			"dateEnd": dateEndFrom,
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			if (!confirm(data.numberOfEvents+" <?=__('schedule blocks will be copied from')?> "+dateStartFrom+" <?=__('through')?> "+dateEndFrom+" <?=__('to')?> "+dateStartTo+" <?=__('through')?> "+dateEndTo+" <?=__('creating')?> "+data.numberOfEvents+" <?=__('total new schedule blocks')?>. <?=__('Any existing schedule for that time will be removed.')?>")) {
@@ -126,7 +126,7 @@ function duplicateScheduleApply(dateStartFrom,dateEndFrom,dateStartTo,dateEndTo)
 			"dateStartTo": dateStartTo,
 			"dateEndTo": dateEndTo,
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 		},

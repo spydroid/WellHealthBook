@@ -124,7 +124,7 @@ function deleteTemplate() {
 		url: "<?=$this->baseUrl?>/clinical-notes-manager.raw/delete-template",
 		handleAs: "json",
 		content: {
-			clinicalNoteTemplateId: rowId,
+            clinicalNoteTemplateId: rowId
 		},
 		load: function(data) {
 			if (data.code == '200') {
@@ -156,7 +156,7 @@ function deleteDefinition() {
 		url: "<?=$this->baseUrl?>/clinical-notes-manager.raw/delete-definition",
 		handleAs: "json",
 		content: {
-			clinicalNoteDefinitionId: rowId,
+            clinicalNoteDefinitionId: rowId
 		},
 		load: function(data) {
 			if (data.code == '200') {

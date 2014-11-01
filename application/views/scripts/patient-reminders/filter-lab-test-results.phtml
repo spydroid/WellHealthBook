@@ -39,7 +39,7 @@ function labTestGetDetails(labTestId) {
 	dojo.xhrGet({
 		url: "<?=$this->baseUrl?>/orders.raw/get-lab-test-info",
 		content: {
-			"labTestId": labTestId,
+            "labTestId": labTestId
 		},
 		handleAs: "json",
 		load: function (data) {

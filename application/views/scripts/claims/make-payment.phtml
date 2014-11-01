@@ -133,7 +133,7 @@ function prcessSaveCheck() {
 		content: {
 			"payment[amount]": amount,
 			"payment[refNum]": chkNo,
-			"payment[payerId]": payerId,
+            "payment[payerId]": payerId
 		},
 		load: function(data) {
 			dojo.byId("checkNoId").value = "";
@@ -298,7 +298,7 @@ function claimPaymentLoadClaims(claimId) {
 		url: globalBaseUrl + "/claims.raw/get-claim-details",
 		handleAs: "json",
 		content: {
-			"claimId": claimId,
+            "claimId": claimId
 		},
 		load: function(data) {
 			paymentGridReload(data.claimId);
@@ -470,7 +470,7 @@ function paymentRebillTo() {
 		handleAs: "json",
 		content: {
 			"claimId": claimId,
-			"payerId": rebillToSelect.options[payerId].value,
+            "payerId": rebillToSelect.options[payerId].value
 		},
 		load: function(data) {
 			if (!data) {
@@ -496,7 +496,7 @@ function paymentSendTo(insurance) {
 		handleAs: "json",
 		content: {
 			"claimId": claimId,
-			"insurance": insurance,
+            "insurance": insurance
 		},
 		load: function(data) {
 			if (!data) {
@@ -645,7 +645,7 @@ var comboType = adjustmentGrid.getCombo(1);
 <?$eobs = array(); foreach(Enumeration::getEnumArray('Eob Adjustment Types') as $key=>$value) $eobs[$key] = $value;
 ksort($eobs,SORT_NUMERIC);
 foreach($eobs as $key=>$value):?>
-comboType.put("<?=$key?>",(<r><![CDATA[<?=$key?>: <?=$value?>]]></r>).toString());
+comboType.put("<?=$key?>", <?=json_encode($key.': '.$value)?>);
 <?endforeach;?>
 
 adjustmentGrid.attachEvent("onEditCell",function(stage,rowId,cellIndex,newValue,oldValue){
@@ -689,7 +689,7 @@ function adjustmentSave(rowId,cellIndex) {
 			"adj[paymentId]": paymentId,
 			"adj[claimLineId]": adjustmentGrid.cells(rowId,indexAppliedTo).getValue(),
 			"adj[type]": adjustmentGrid.cells(rowId,indexType).getValue(),
-			"adj[value]": adjustmentGrid.cells(rowId,indexValue).getValue(),
+            "adj[value]": adjustmentGrid.cells(rowId,indexValue).getValue()
 		},
 		load: function(data) {
 			if (!data.id) {

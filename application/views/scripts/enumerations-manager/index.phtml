@@ -45,7 +45,7 @@ function enumSingleUpdate(field,id,value,cellIndex,grid) {
 		content: {
 			field: field,
 			enumerationId: id,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			grid.cells(id,cellIndex).setValue(data);
@@ -133,7 +133,7 @@ function enumerationDelete(enumerationId,grid) {
 		url: "<?=$this->baseUrl?>/enumerations-manager.raw/process-delete",
 		handleAs: "json",
 		content: {
-			"enumerationId": enumerationId,
+            "enumerationId": enumerationId
 		},
 		load: function (data) {
 			enumUpdateListGrid();

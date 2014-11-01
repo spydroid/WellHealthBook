@@ -20,7 +20,7 @@ function claimEditsDelete(rowId) {
 		url: "<?=$this->baseUrl?>/claim-edits-manager.raw/process-delete",
 		handleAs: "json",
 		content: {
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			claimEditsGridReload();

@@ -41,7 +41,7 @@
 </div>
 
 <script>
-var defaultDatasource = (<r><![CDATA[<?=$this->datasource->defaultTemplate()?>]]></r>).toString();
+var defaultDatasource = <?=json_encode($this->datasource->defaultTemplate())?>;
 
 function postSubmit<?=$this->form->getId()?>(data) {
 <?if (strlen($this->callback) > 0):?>

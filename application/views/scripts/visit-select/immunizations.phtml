@@ -261,7 +261,7 @@ function immunizationRemove(rowId) {
 		url: "<?=$this->baseUrl?>/immunizations.raw/process-delete-immunization",
 		handleAs: "json",
 		content: {
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			immunizationsListGridReload();
@@ -282,7 +282,7 @@ function immunizationSave(rowId,code,description,callback) {
 		var immunizationContent = {
 			"immunizations[patientId]": mainController.getActivePatient(),
 			"immunizations[code]": code,
-			"immunizations[immunization]": description,
+            "immunizations[immunization]": description
 		};
 	}
 	else {
@@ -299,7 +299,7 @@ function immunizationSave(rowId,code,description,callback) {
 			"immunizations[reaction]": immunizationsListGrid.cells(rowId,indexPIMReaction).getValue(),
 			"immunizations[immunization]": immunizationsListGrid.cells(rowId,indexPIMImmunization).getValue().replace(/\n/g," "),
 			"immunizations[patientReported]": immunizationsListGrid.cells(rowId,indexPIMPR).getValue(),
-			"immunizations[comment]": immunizationsListGrid.cells(rowId,indexPIMComment).getValue(),
+            "immunizations[comment]": immunizationsListGrid.cells(rowId,indexPIMComment).getValue()
 		};
 	}
 	dojo.xhrPost({

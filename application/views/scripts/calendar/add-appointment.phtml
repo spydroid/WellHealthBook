@@ -108,7 +108,7 @@ function calendarMakeAppointment(forced,callback) {
 		url: "<?=$this->baseUrl?>/calendar.raw/process-add-appointment",
 		form: "addappointment",
 		content: {
-			"forced": (forced)?"1":"0",
+            "forced": (forced)?"1":"0"
 		},
 		handleAs: "json",
 		load: function (data) {
@@ -326,7 +326,7 @@ function getDetails(args) {
 		url: "<?=$this->baseUrl?>/patient.raw/get-details",
 		handleAs: "json",
 		content: {
-			"personId": personId,
+            "personId": personId
 		},
 		load: function(data) {
 			if (!data) return;
@@ -356,7 +356,7 @@ function pNotesProcessEdit(id,field,value,type,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == "function") {

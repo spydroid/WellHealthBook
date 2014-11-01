@@ -23,7 +23,7 @@ function adminPersonAdd() {
 	dojo.xhrPost({
 		url: globalBaseUrl+"/admin-users.raw/process-add",
 		content: {
-			"username": username,
+            "username": username
 		},
 		handleAs: "json",
 		load: function(data,ioArgs) {

@@ -75,7 +75,7 @@ function changeCacheSettings(val) {
     dojo.xhrPost ({
         url: "<?=$this->baseUrl?>/menu-manager.raw/ajax-change-cache-settings",
         content: {
-            cacheMode: val,
+            cacheMode: val
         },
         load: function (data) {
             dojo.byId("rightContent").innerHTML = data;
@@ -145,7 +145,7 @@ leftToolbar.attachEvent("onClick", function(id){
                 dojo.xhrPost ({
                     url: "<?=$this->baseUrl?>/menu-manager.raw/ajax-delete",
         	        content: {
-                        menuId: selectedMenuId,
+                        menuId: selectedMenuId
                     },
                     handleAs: "json",
                     load: function (objResponse, ioArgs) {
@@ -288,7 +288,7 @@ function submitmenuitemForm() {
         url: getBaseUrl() + "/menu-manager.raw/edit-process",
         form: 'menuitem',
         content: {
-            active: chActive,
+            active: chActive
         },
         handleAs: "json",
         load: function(objResponse, ioArgs) {
@@ -322,7 +322,7 @@ function changeCacheSettings(val) {
     dojo.xhrPost ({
         url: getBaseUrl() + "/menu-manager.raw/ajax-change-cache-settings",
         content: {
-            cacheMode: val,
+            cacheMode: val
         },
         handleAs: "json",
         load: function(objResponse, ioArgs) {

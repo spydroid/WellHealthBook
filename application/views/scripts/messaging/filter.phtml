@@ -49,7 +49,7 @@ function submitMessagingFilter() {
 		url: "<?=$this->baseUrl?>/messaging.raw/set-filters",
 		handleAs: "json",
 		content: {
-			"filters": messagingFilters,
+            "filters": messagingFilters
 		},
 		load: function (data) {
 			messagingGridReload();

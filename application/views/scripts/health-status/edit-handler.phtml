@@ -40,9 +40,9 @@
 <div class="formRow" style="padding-top:4px;">
 	<?=$this->form->handlerObject->renderLabel()?>
 	<script>
-	var hsaHandlerObject = (<r><![CDATA[<?=$this->form->handlerObject->getValue()?>]]></r>).toString();
-	var hsaDatasource = (<r><![CDATA[<?=$this->form->datasource->getValue()?>]]></r>).toString();
-	var hsaTemplate = (<r><![CDATA[<?=$this->form->template->getValue()?>]]></r>).toString();
+	var hsaHandlerObject = <?=json_encode($this->form->handlerObject->getValue())?>;
+	var hsaDatasource = <?=json_encode($this->form->datasource->getValue())?>;
+	var hsaTemplate = <?=json_encode($this->form->template->getValue())?>;
 	function hsaHandlerEditCode(code) {
 		var handlerName = dojo.byId("handler-name").value;
 		if (handlerName == "") {

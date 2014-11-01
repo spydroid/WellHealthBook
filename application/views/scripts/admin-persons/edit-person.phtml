@@ -317,7 +317,7 @@ function personSingleUpdate(id,field,value,type,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == "function") {
@@ -339,7 +339,7 @@ function personRemove(id,type,callback) {
 		content: {
 			personId: "<?=$this->form->personId->getValue()?>",
 			type: type,
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			if (typeof callback == "function") {

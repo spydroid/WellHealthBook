@@ -47,7 +47,7 @@ function reportsManagerAdd(parentId) {
 			"reportBase[displayName]": displayName,
 			"reportBase[systemName]": systemName,
 			"useParentId": useParentId,
-			"parentId": parentId,
+            "parentId": parentId
 		},
 		load: function (data) {
 			reportsManagerGridReload();
@@ -86,7 +86,7 @@ function reportsManagerDelete(baseId) {
 		url: "<?=$this->baseUrl?>/reports-manager.raw/process-delete-base",
 		handleAs: "json",
 		content: {
-			"baseId": baseId,
+            "baseId": baseId
 		},
 		load: function (data) {
 			reportsManagerGridReload();
@@ -144,7 +144,7 @@ function reportsManagerGridOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFrom,co
 		handleAs: "json",
 		content: {
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			reportsManagerGridReload();

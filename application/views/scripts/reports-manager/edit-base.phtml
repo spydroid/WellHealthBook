@@ -101,7 +101,7 @@ function reportBaseFiltersGridOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFrom
 		content: {
 			"baseId": dojo.byId("<?=$this->form->reportBaseId->getId()?>").value,
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			reportBaseFiltersGrid.clearAll();
@@ -160,7 +160,7 @@ function reportBaseFiltersDelete(id) {
 		handleAs: "json",
 		content: {
 			"baseId": dojo.byId("<?=$this->form->reportBaseId->getId()?>").value,
-			"filterId": id,
+            "filterId": id
 		},
 		load: function (data) {
 			reportBaseFiltersGrid.deleteRow(id);
@@ -261,7 +261,7 @@ function reportBaseQueriesDelete(queryId) {
 		url: "<?=$this->baseUrl?>/reports-manager.raw/process-delete-query",
 		handleAs: "json",
 		content: {
-			"queryId": queryId,
+            "queryId": queryId
 		},
 		load: function (data) {
 			//reportBaseQueriesDelete(queryId);
@@ -365,7 +365,7 @@ function reportBaseViewsAdd() {
 		content: {
 			"reportView[reportBaseId]": "<?=$this->form->reportBaseId->getValue()?>",
 			"reportView[displayName]": displayName,
-			"reportView[systemName]": systemName,
+            "reportView[systemName]": systemName
 		},
 		load: function (data) {
 			if (!data) return;
@@ -405,7 +405,7 @@ function reportBaseViewsDelete(viewId) {
 		url: "<?=$this->baseUrl?>/reports-manager.raw/process-delete-view",
 		handleAs: "json",
 		content: {
-			"viewId": viewId,
+            "viewId": viewId
 		},
 		load: function (data) {
 			reportBaseViewsGridReload();
@@ -429,7 +429,7 @@ function reportBaseViewsGridOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFrom,c
 		content: {
 			"baseId": dojo.byId("<?=$this->form->reportBaseId->getId()?>").value,
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			reportBaseViewsGrid.clearAll();

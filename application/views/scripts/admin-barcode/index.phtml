@@ -41,7 +41,7 @@ function abToolbarOnClicked(id) {
 				url: "<?=$this->baseUrl?>/admin-barcode.raw/process-delete",
 				handleAs: "json",
 				content: {
-					name: rowId,
+                    name: rowId
 				},
 				load: function (data) {
 					abMacroGridReload();
@@ -85,7 +85,7 @@ function abMacroOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFrom,colIndexTo) {
 		handleAs: "json",
 		content: {
 			nameFrom: idFrom,
-			nameTo: idTo,
+            nameTo: idTo
 		},
 		load: function (data) {
 			abMacroGridReload();

@@ -37,6 +37,6 @@ function educationLookupGridOnRowDblClicked(rowId,colIndex) {
 educationLookupGrid.attachEvent("onRowDblClicked",educationLookupGridOnRowDblClicked);
 educationLookupGrid.init();
 <?foreach ($this->listEducationTopics as $code=>$topic):?>
-educationLookupGrid.addRow("<?=$code?>",(<r><![CDATA[<?=$topic['displayName']?>]]></r>).toString()+","+(<r><![CDATA[<?=$topic['name']?>]]></r>).toString());
+educationLookupGrid.addRow("<?=$code?>", <?=json_encode($topic['displayName'])?>+","+<?=json_encode($topic['name'])?>);
 <?endforeach;?>
 </script>

@@ -150,7 +150,7 @@ function addResource(name) {
 		content: {
 			"aclTemplateId": aclTemplateId,
 			"type": "resource",
-			"value": name,
+            "value": name
 		},
 		load: function(data,ioArgs) {
 			if (data.error) {
@@ -202,7 +202,7 @@ function addPermission(rowId,colIndex) {
 			"type": "permission",
 			"value": value,
 			"resourceId": rowId,
-			"mode": name.toLowerCase(),
+            "mode": name.toLowerCase()
 		},
 		load: function(data,ioArgs) {
 			if (data.error) {
@@ -278,7 +278,7 @@ function savePermission(name,value,template,access) {
 			name: name,
 			value: value,
 			template: template,
-			access: access,
+            access: access
 		},
 		load: function(data,ioArgs) {
 			return data;

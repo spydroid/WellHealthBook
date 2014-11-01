@@ -58,7 +58,7 @@ function claimsTransmit() {
 		url: globalBaseUrl + "/claims.raw/set-session-batch-ids",
 		handleAs: "json",
 		content: {
-			"ids": claimIds.join(","),
+            "ids": claimIds.join(",")
 		},
 		load: function(data) {
 			window.open("<?=$this->baseUrl?>/claims.raw/process-claims?type="+type,"claims");
@@ -214,7 +214,7 @@ function claimsCheckRules(visitId,callback) {
 		url: globalBaseUrl + "/claims.raw/check-rules",
 		handleAs: "json",
 		content: {
-			"visitId": visitId,
+            "visitId": visitId
 		},
 		load: function(data) {
 			if (typeof callback == "function") {
@@ -325,7 +325,7 @@ function claimsProcessCloseVisit(visitId,offset,callback) {
 		url: globalBaseUrl + "/claims.raw/process-close-visit",
 		handleAs: "json",
 		content: {
-			"visitId": visitId,
+            "visitId": visitId
 		},
 		load: function(data) {
 			claimsCloseVisit(offset++,callback);
@@ -378,7 +378,7 @@ function claimsBatchVisits(type) {
 		handleAs: "json",
 		content: {
 			"type": type,
-			"ids": rowId,
+            "ids": rowId
 		},
 		load: function(data) {
 			claimsGridReload();
@@ -435,7 +435,7 @@ function claimsInquiry() {
 		url: globalBaseUrl + "/claims.raw/inquire",
 		handleAs: "json",
 		content: {
-			"ids": rowId,
+            "ids": rowId
 		},
 		load: function(data) {
 			var report = [];
@@ -538,7 +538,7 @@ function claimsMakePayment() {
 		url: globalBaseUrl + "/claims.raw/set-session-ids",
 		handleAs: "json",
 		content: {
-			"ids": ids,
+            "ids": ids
 		},
 		load: function(data) {
 			openMakePaymentWindow();

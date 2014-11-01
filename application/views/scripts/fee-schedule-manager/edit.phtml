@@ -111,7 +111,7 @@ function feeScheduleSetDefaultFee() {
 		handleAs: "json",
 		content: {
 			"guid": "<?=$this->form->guid->getValue()?>",
-			"fee": dojo.byId("<?=$this->form->fee->getId()?>").value,
+            "fee": dojo.byId("<?=$this->form->fee->getId()?>").value
 		},
 		load: function (data) {
 			alert(data);

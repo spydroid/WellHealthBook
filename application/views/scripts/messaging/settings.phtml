@@ -15,7 +15,7 @@ function submitMessagingSettings() {
 		handleAs: "json",
 		content: {
 			"messaging[autoAttach]": autoAttach,
-			"messaging[defaultClinicalNote]": dojo.byId("messaging-defaultClinicalNote").value,
+            "messaging[defaultClinicalNote]": dojo.byId("messaging-defaultClinicalNote").value
 		},
 		load: function (data) {
 			<?if ($this->callback != ''):?>

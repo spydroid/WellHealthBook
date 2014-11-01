@@ -80,7 +80,7 @@ function onToolbarClicked(id) {
 			dojo.xhrPost({
 				url: "<?=$this->baseUrl?>/formulary-manager.raw/process-add",
 				content: {
-					name: name,
+                    name: name
 				},
 				handleAs: "json",
 				load: function (response) {
@@ -131,7 +131,7 @@ function alterFormulary(evt,id) {
 			dojo.xhrPost({
 				url: "<?=$this->baseUrl?>/formulary-manager.raw/process-"+evt,
 				content: {
-					id: id,
+                    id: id
 				},
 				handleAs: "json",
 				load: function (response) {
@@ -220,7 +220,7 @@ function fmListGridOnEditCell(stage,rowId,cellIndex,newValue,oldValue) {
 					handleAs: "json",
 					content: {
 						oldName: rowId,
-						newName: newValue,
+                        newName: newValue
 					},
 					load: function (data) {
 						reloadListGrid();

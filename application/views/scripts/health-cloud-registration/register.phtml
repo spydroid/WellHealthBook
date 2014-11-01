@@ -12,7 +12,7 @@ function healthCloudRegistrationContinue() {
 	dojo.xhrPost({
 		url: "<?=$this->baseUrl?>/health-cloud-registration.raw/process-registration",
 		content: {
-			"updateFileId": "<?=$this->updateFileId?>",
+            "updateFileId": "<?=$this->updateFileId?>"
 		},
 		handleAs: "json",
 		load: function (response) {

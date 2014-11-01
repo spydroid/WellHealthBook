@@ -4,7 +4,7 @@ function nsdrRemove(uuid,url,callback) {
 		url: url,
 		handleAs: "json",
 		content: {
-			uuid: uuid,
+            uuid: uuid
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {

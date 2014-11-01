@@ -58,7 +58,7 @@ function hsaUpdateStatus(id) {
 		url: "<?=$this->baseUrl?>/health-status.raw/process-edit-status",
 		content: {
 			"healthStatusAlertId": healthStatusAlertId,
-			"status": stat,
+            "status": stat
 		},
 		handleAs: 'json',
 		load: function (data) {
@@ -87,7 +87,7 @@ function hsaUpdateSubscription(unsubscribe) {
 		content: {
 			"personId": mainController.getActivePatient(),
 			"subscribe": subscribe,
-			"handlerId": handlerId,
+            "handlerId": handlerId
 		},
 		handleAs: 'json',
 		load: function (data) {

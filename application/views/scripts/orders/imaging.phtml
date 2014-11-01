@@ -248,20 +248,23 @@ function imagingCommentOnChanged() {
 var imagingList = {
 <?foreach ($this->imagingList as $typeKey=>$imagingTypes):?>
 	"<?=$typeKey?>": {
-		"name": (<r><![CDATA[<?=$imagingTypes['name']?>]]></r>).toString(),
-		"procedures": {
-<?foreach ($imagingTypes['procedures'] as $procedureKey=>$procedure):
-	if ($procedureKey == $this->form->procedure->getValue()):
-		$defaultTypeKey = $typeKey;
-	endif;
+		"name": <?=json_encode($imagingTypes['name'])?>,
+<?php
+$procedures = array();
+foreach ($imagingTypes['procedures'] as $procedureKey=>$procedure) {
+    if ($procedureKey == $this->form->procedure->getValue()) $defaultTypeKey = $typeKey;
+    $procedures[] = $procedureKey.': {"procedure": '.json_encode($procedure['procedure']).', "comment": '.json_encode($procedure['comment']).'}';
+}
+$modifiers = array();
+foreach ($imagingTypes['modifiers'] as $modifierKey=>$modifier) {
+    $modifiers[] = $modifierKey.': '.json_encode($modifier);
+}
 ?>
-			"<?=$procedureKey?>": {"procedure": (<r><![CDATA[<?=$procedure['procedure']?>]]></r>).toString(), "comment": (<r><![CDATA[<?=$procedure['comment']?>]]></r>).toString()},
-<?endforeach;?>
+		"procedures": {
+            <?=implode(', ', $procedures)?>
 		},
 		"modifiers": {
-<?foreach ($imagingTypes['modifiers'] as $modifierKey=>$modifier):?>
-			"<?=$modifierKey?>": (<r><![CDATA[<?=$modifier?>]]></r>).toString(),
-<?endforeach;?>
+            <?=implode(', ', $modifiers)?>
 		},
 	},
 <?endforeach;?>

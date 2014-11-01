@@ -148,7 +148,7 @@ proceduresListGrid.init();
 var comboProc = proceduresListGrid.getCombo(indexProcProvider);
 comboProc.put("","");
 <?foreach ($this->listProviders as $key=>$value):?>
-comboProc.put((<r><![CDATA[<?=$key?>]]></r>).toString(),(<r><![CDATA[<?=$value?>]]></r>).toString());
+comboProc.put(<?=json_encode($key)?>, <?=json_encode($value)?>);
 <?endforeach;?>
 
 proceduresListGrid.attachEvent("onRowSelect",function(rowId,cellIndex){
@@ -220,7 +220,7 @@ function procedureSave(rowId,callback) {
 		"procedure[procedure]": proceduresListGrid.cells(rowId,indexProcProcedure).getValue(),
 		"procedure[quantity]": proceduresListGrid.cells(rowId,indexProcQuantity).getValue(),
 		"procedure[providerId]": proceduresListGrid.cells(rowId,indexProcProvider).getValue(),
-		"procedure[comments]": proceduresListGrid.cells(rowId,indexProcComments).getValue(),
+        "procedure[comments]": proceduresListGrid.cells(rowId,indexProcComments).getValue()
 	};
 	dojo.xhrPost({
 		url: "<?=$this->baseUrl?>/procedures.raw/process-patient-procedure",
@@ -258,7 +258,7 @@ function procedureRemove(rowId) {
 		url: "<?=$this->baseUrl?>/procedures.raw/process-delete-patient-procedure",
 		handleAs: "json",
 		content: {
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			var id = proceduresListGrid.cells(rowId,indexProcCode).getValue();

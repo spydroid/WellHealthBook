@@ -62,7 +62,7 @@ function popupReportGetResults(viewId,queryId) {
 		url: "<?=$this->baseUrl?>/reports.raw/process-query",
 		content: {
 			"queryId": queryId,
-			"viewId": viewId,
+            "viewId": viewId
 		},
 		handleAs: "json",
 		load: function (data) {

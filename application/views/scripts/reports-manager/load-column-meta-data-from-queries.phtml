@@ -47,7 +47,7 @@ queryGrid.init();
 var val = "";
 <?foreach ($this->queries as $key=>$value):?>
 queryGrid.addRow("<?=$key?>","");
-val = (<r><![CDATA[ <?=$value?>; ]]></r>).toString();
+val = <?=json_encode($value)?>;
 queryGrid.cells("<?=$key?>",0).setValue(val);
 <?endforeach;?>
 </script>

@@ -252,7 +252,7 @@ function diagnosisRemove(rowId) {
 		url: "<?=$this->baseUrl?>/diagnosis.raw/process-delete-patient-diagnosis",
 		handleAs: "json",
 		content: {
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			var id = diagnosesListGrid.cells(rowId,indexDiagCode).getValue();

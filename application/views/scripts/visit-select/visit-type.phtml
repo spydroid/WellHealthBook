@@ -85,7 +85,7 @@ function visitTypesAdd(rowId) {
 		content: {
 			"personId": mainController.getActivePatient(),
 			"visitId": mainController.getActiveVisit(),
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			if (data.error) {
@@ -127,7 +127,7 @@ function addToCurrentProviderList() {
 			"personId": mainController.getActivePatient(),
 			"visitId": mainController.getActiveVisit(),
 			"ids": rowId,
-			"primary": currentPrimaryProviderRowId,
+            "primary": currentPrimaryProviderRowId
 		},
 		load: function (data) {
 			vtCurrentProvidersListGridReload();
@@ -152,7 +152,7 @@ function removeFromCurrentProviderList() {
 		content: {
 			"personId": mainController.getActivePatient(),
 			"visitId": mainController.getActiveVisit(),
-			"ids": rowId,
+            "ids": rowId
 		},
 		load: function (data) {
 			vtCurrentProvidersListGridReload();
@@ -180,7 +180,7 @@ function setPrimaryProvider(checked) {
 			"personId": mainController.getActivePatient(),
 			"visitId": mainController.getActiveVisit(),
 			"id": rowId,
-			"isPrimary": isPrimary,
+            "isPrimary": isPrimary
 		},
 		load: function (data) {
 			vtCurrentProvidersListGridReload(false);

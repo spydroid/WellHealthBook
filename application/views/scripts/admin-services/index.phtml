@@ -83,7 +83,7 @@ function adminServicesProcessPermission(service) {
 		url: globalBaseUrl+"/admin-services.raw/process-permission",
 		handleAs: "json",
 		content: {
-			"service": service,
+            "service": service
 		},
 		load: function (data) {
 			adminServicesGridReload();

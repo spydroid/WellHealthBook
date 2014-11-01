@@ -59,7 +59,7 @@ function eobProcessBatch() {
 		handleAs: "json",
 		content: {
 			"ids": eobFilesGrid.cells(rowId,indexEOBIDS).getValue(),
-			"unallocatedFunds": eobFilesGrid.cells(rowId,indexEOBFunds).getValue(),
+            "unallocatedFunds": eobFilesGrid.cells(rowId,indexEOBFunds).getValue()
 		},
 		load: function(data) {
 			openDefaultAccordion();

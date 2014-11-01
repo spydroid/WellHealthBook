@@ -520,7 +520,7 @@ function vitalSignsEnteredInError(groupId) {
 		url: "<?=$this->baseUrl?>/vital-signs.raw/process-entered-in-error",
 		handleAs: "json",
 		content: {
-			"groupId": groupId,
+            "groupId": groupId
 		},
 		load: function (data) {
 			vitalSignsLabelGridReload();

@@ -137,13 +137,12 @@ function reportViewShowResultsInOnChanged(type) {
 	showResultsOptions.innerHTML = "";
 	switch (type) {
 		case "file":
-			showResultsOptions.innerHTML = (<r><![CDATA[
-				<div style="float:left;margin-left:10px;"><?=__('Separator')?> <?=$this->formText('showResultsOptions[separator]',null,array('id'=>'showResultsOptions-separator','class'=>'smallButton'))?></div>
-				<div style="float:left;margin-left:20px;"><?=__('Line Endings')?> <?=$this->formSelect('showResultsOptions[lineEndings]',null,array('id'=>'showResultsOptions-lineEndings','class'=>'smallButton'),$this->lineEndings)?></div>
+			showResultsOptions.innerHTML = <?=json_encode('
+				<div style="float:left;margin-left:10px;">'.__('Separator').' '.$this->formText('showResultsOptions[separator]',null,array('id'=>'showResultsOptions-separator','class'=>'smallButton')).'</div>
+				<div style="float:left;margin-left:20px;">'.__('Line Endings').' '.$this->formSelect('showResultsOptions[lineEndings]',null,array('id'=>'showResultsOptions-lineEndings','class'=>'smallButton'),$this->lineEndings).'</div>
 				<br style="clear:left;margin-top:5px;" />
-				<div style="float:left;margin-left:10px;"><?=__('Results Separator')?> <?=$this->formText('showResultsOptions[resultsSeparator]',null,array('id'=>'showResultsOptions-resultsSeparator','class'=>'smallButton'))?></div>
-				<div style="float:left;margin-left:20px;"><input type="checkbox" id="showResultsOptions-includeHeaderRow" name="showResultsOptions[includeHeaderRow]" /> <?=__('include header row')?></div>
-			]]></r>).toString();
+				<div style="float:left;margin-left:10px;">'.__('Results Separator').' '.$this->formText('showResultsOptions[resultsSeparator]',null,array('id'=>'showResultsOptions-resultsSeparator','class'=>'smallButton')).'</div>
+				<div style="float:left;margin-left:20px;"><input type="checkbox" id="showResultsOptions-includeHeaderRow" name="showResultsOptions[includeHeaderRow]" /> '.__('include header row').'</div>')?>
 			if (type == "<?=$this->form->showResultsIn->getValue()?>" && <?=(count($this->showResultsOptions) > 0)?'true':'false'?>) {
 				dojo.byId("showResultsOptions-separator").value = "<?=isset($this->showResultsOptions['separator'])?$this->showResultsOptions['separator']:''?>";
 				var lineEndingsSelect = dojo.byId("showResultsOptions-lineEndings");
@@ -158,29 +157,27 @@ function reportViewShowResultsInOnChanged(type) {
 			}
 			break;
 		case "pdf":
-			showResultsOptions.innerHTML = (<r><![CDATA[
-				<?=$this->formHidden('showResultsOptions[pdfTemplateFile]',null,array('id'=>'showResultsOptions-pdfTemplateFile'))?>
+			showResultsOptions.innerHTML = <?=json_encode(
+				$this->formHidden('showResultsOptions[pdfTemplateFile]',null,array('id'=>'showResultsOptions-pdfTemplateFile')).'
 				<div style="float:left;" id="uploadAttachmentContainer" style="border: thin solid blank;">
 					<div style="margin-left:10px;width:350px;">
 						<div style="width:99.9%;margin-left:auto;margin-right:auto;" id="fileUploadFormId">
-							<strong><?=__('Template File')?>:</strong>
-							<?=$this->formHidden('attachmentReferenceId',$this->form->reportViewId->getValue(),array('id'=>'attachmentReferenceId'))?>
-							<?=$this->formHidden('MAX_FILE_SIZE',10485760,array('id'=>'MAX_FILE_SIZE'))?>
-							<?=$this->formHidden('APC_UPLOAD_PROGRESS',uniqid(''),array('id'=>'progressKey'))?>
-							<input type="file" name="uploadFile"/>
-							<?=$this->formButton('upload',__('Upload'),array('onClick'=>'reportViewAjaxUploadFile()'))?>
+							<strong>'.__('Template File').':</strong>'.
+							$this->formHidden('attachmentReferenceId',$this->form->reportViewId->getValue(),array('id'=>'attachmentReferenceId')).
+							$this->formHidden('MAX_FILE_SIZE',10485760,array('id'=>'MAX_FILE_SIZE')).
+							$this->formHidden('APC_UPLOAD_PROGRESS',uniqid(''),array('id'=>'progressKey')).'
+							<input type="file" name="uploadFile"/>'.
+							$this->formButton('upload',__('Upload'),array('onClick'=>'reportViewAjaxUploadFile()')).'
 						</div>
 						<div style="width:325px;margin-left:auto;margin-right:auto;display:none;" id="fileUploadProgressId">
-							<strong><?=__("Progress")?>:</strong>
+							<strong>'.__("Progress").':</strong>
 							<div style="width:320px;margin-left:auto;margin-right:auto;border:thin solid black;height:20px;"><div id="uploadProgressBarId" style="background-color:blue; width:0px;height:100%;"></div></div>
 						</div>
 					</div>
-				</div>
-			]]></r>).toString();
+				</div>')?>
 			if (type == "<?=$this->form->showResultsIn->getValue()?>" && <?=(count($this->showResultsOptions) > 0)?'true':'false'?>) {
-				showResultsOptions.innerHTML += (<r><![CDATA[
-				<br /><?=isset($this->showResultsOptions['pdfTemplateFileContent'])?$this->showResultsOptions['pdfTemplateFileContent']:''?>
-				]]></r>).toString();
+				showResultsOptions.innerHTML += <?=json_encode('
+				<br />'.(isset($this->showResultsOptions['pdfTemplateFileContent'])?$this->showResultsOptions['pdfTemplateFileContent']:''))?>
 			}
 			break;
 		case "graph":
@@ -286,7 +283,7 @@ function reportViewTransformAdd() {
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
 			"mappingId": reportViewMappingGrid.getSelectedRowId(),
-			"value": value,
+            "value": value
 		},
 		load: function (data) {
 			if (!data) return;
@@ -328,7 +325,7 @@ function reportViewTransformDelete() {
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
 			"mappingId": reportViewMappingGrid.getSelectedRowId(),
-			"transformIds": rowId,
+            "transformIds": rowId
 		},
 		load: function (data) {
 			if (!data) return;
@@ -471,7 +468,7 @@ function reportViewMappingGridOnCellEdited(stage,rowId,cellIndex,newValue,oldVal
 				"viewId": "<?=$this->form->reportViewId->getValue()?>",
 				"mappingId": rowId,
 				"key": key,
-				"value": newValue,
+                "value": newValue
 			},
 			load: function (data) {
 				if (!data) return;
@@ -499,7 +496,7 @@ function reportViewMappingGridOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFrom
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			reportViewMappingReload(data);
@@ -568,7 +565,7 @@ function reportViewMappingDelete(id) {
 		handleAs: "json",
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
-			"mappingIds": id,
+            "mappingIds": id
 		},
 		load: function (data) {
 			reportViewMappingReload(data);
@@ -700,7 +697,7 @@ function reportViewMappingShowTransformPanel(rowId) {
 		handleAs: "json",
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
-			"mappingId": rowId,
+            "mappingId": rowId
 		},
 		load: function (data) {
 			if (!data) return;
@@ -737,7 +734,7 @@ function reportViewTransformGridOnRowSelected(rowId,cellIndex) {
 		content: {
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
 			"mappingId": reportViewMappingGrid.getSelectedRowId(),
-			"transformId": rowId,
+            "transformId": rowId
 		},
 		load: function (data) {
 			if (!data) return;
@@ -770,11 +767,10 @@ function reportViewTransformShowOptions(rowId,options) {
 			reportViewTransformEditPane.innerHTML = "No options are available for the "+label+" transformation";
 			break;
 		case "pad":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
-				<label><?=__('Pad Type')?><label> <?=$this->formSelect('options[type]',null,array('id'=>'options-type','class'=>'smallButton'),array(STR_PAD_LEFT=>'left',STR_PAD_RIGHT=>'right',STR_PAD_BOTH=>'both'))?>
-				<br /><label><?=__('Pad Char')?></label> <?=$this->formText('options[char]',null,array('id'=>'options-char','class'=>'smallButton'))?>
-				<br /><label><?=__('Pad Length')?></label> <?=$this->formText('options[len]',null,array('id'=>'options-len','class'=>'smallButton'))?>
-			]]></r>).toString();
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
+				<label>'.__('Pad Type').'<label> '.$this->formSelect('options[type]',null,array('id'=>'options-type','class'=>'smallButton'),array(STR_PAD_LEFT=>'left',STR_PAD_RIGHT=>'right',STR_PAD_BOTH=>'both')).'
+				<br /><label>'.__('Pad Char').'</label> '.$this->formText('options[char]',null,array('id'=>'options-char','class'=>'smallButton')).'
+				<br /><label>'.__('Pad Length').'</label> '.$this->formText('options[len]',null,array('id'=>'options-len','class'=>'smallButton')))?>;
 			if (options) {
 				var optionsTypeSelect = dojo.byId("options-type");
 				for (var i in optionsTypeSelect.options) {
@@ -788,40 +784,36 @@ function reportViewTransformShowOptions(rowId,options) {
 			}
 			break;
 		case "truncate":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
-				<label><?=__('Length')?></label> <?=$this->formText('options[len]',null,array('id'=>'options-len','class'=>'smallButton'))?>
-			]]></r>).toString();
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
+				<label>'.__('Length').'</label> '.$this->formText('options[len]',null,array('id'=>'options-len','class'=>'smallButton')))?>;
 			if (options) {
 				dojo.byId("options-len").value = options.len;
 			}
 			break;
 		case "customLink":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
-				<label><?=__('href')?></label> <?=$this->formText('options[href]',null,array('id'=>'options-href','class'=>'smallButton'))?> use {{value}} as token
-				<br /><label><?=__('onclick')?></label> <?=$this->formText('options[onclick]',null,array('id'=>'options-onclick','class'=>'smallButton'))?>
-			]]></r>).toString();
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
+				<label>'.__('href').'</label> '.$this->formText('options[href]',null,array('id'=>'options-href','class'=>'smallButton')).' use {{value}} as token
+				<br /><label>'.__('onclick').'</label> '.$this->formText('options[onclick]',null,array('id'=>'options-onclick','class'=>'smallButton')))?>;
 			if (options) {
 				dojo.byId("options-href").value = options.href;
 				dojo.byId("options-onclick").value = options.onclick;
 			}
 			break;
 		case "regex":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
-				<label><?=__('Pattern')?></label> <?=$this->formText('options[pattern]',null,array('id'=>'options-pattern','class'=>'smallButton'))?>
-				<br /><label><?=__('Replacement')?></label> <?=$this->formText('options[replacement]',null,array('id'=>'options-replacement','class'=>'smallButton'))?>
-			]]></r>).toString();
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
+				<label>'.__('Pattern').'</label> '.$this->formText('options[pattern]',null,array('id'=>'options-pattern','class'=>'smallButton')).'
+				<br /><label>'.__('Replacement').'</label> '.$this->formText('options[replacement]',null,array('id'=>'options-replacement','class'=>'smallButton')))?>
 			if (options) {
 				dojo.byId("options-pattern").value = options.pattern;
 				dojo.byId("options-replacement").value = options.replacement;
 			}
 			break;
 		case "enumLookup":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
 				<div id="enumLookupNameAutoCompleteDivId"></div>
 				<input type="hidden" name="options[enumValue]" id="options-enumValue" />
-				<br /><input type="radio" name="options[direction]" id="options-direction" value="displayName" /> <?=__('Use value to lookup display name')?>
-				<br /><input type="radio" name="options[direction]" id="options-direction" value="key" /> <?=__('Use value to lookup key')?>
-			]]></r>).toString();
+				<br /><input type="radio" name="options[direction]" id="options-direction" value="displayName" /> '.__('Use value to lookup display name').'
+				<br /><input type="radio" name="options[direction]" id="options-direction" value="key" /> '.__('Use value to lookup key'))?>;
 			reportViewGenerateEnumLookup();
 
 			var direction = "displayName";
@@ -840,9 +832,8 @@ function reportViewTransformShowOptions(rowId,options) {
 			}
 			break;
 		case "dateFormat":
-			reportViewTransformEditPane.innerHTML = (<r><![CDATA[
-				<label><?=__('Format')?></label> <?=$this->formText('options[format]',null,array('id'=>'options-format','class'=>'smallButton'))?>
-			]]></r>).toString();
+			reportViewTransformEditPane.innerHTML = <?=json_encode('
+				<label>'.__('Format').'</label> '.$this->formText('options[format]',null,array('id'=>'options-format','class'=>'smallButton')))?>;
 			if (options) {
 				dojo.byId("options-format").value = options.format;
 			}
@@ -875,7 +866,7 @@ function reportViewTransformGridOnDragged(idFrom,idTo,gridFrom,gridTo,colIndexFr
 			"viewId": "<?=$this->form->reportViewId->getValue()?>",
 			"mappingId": reportViewMappingGrid.getSelectedRowId(),
 			"from": idFrom,
-			"to": idTo,
+            "to": idTo
 		},
 		load: function (data) {
 			reportViewTransformReload(data);

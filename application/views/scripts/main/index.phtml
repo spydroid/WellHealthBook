@@ -528,7 +528,7 @@ function setActiveTab(activeTab) {
 		url: '<?=$this->baseUrl?>/main.raw/set-active-tab',
 		handleAs: 'json',
 		content: {
-			activeTab: activeTab,
+            activeTab: activeTab
 		},
 		load: function (data) {
 			jsMainMenu.clearAll();

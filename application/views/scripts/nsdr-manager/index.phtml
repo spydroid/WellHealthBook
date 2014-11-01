@@ -73,7 +73,7 @@ nsdrLeftToolbar.attachEvent("onClick", function(id){
 				url: "<?=$this->baseUrl?>/nsdr.raw/system",
 				handleAs: "json",
 				content: {
-					event: id,
+                    event: id
 				},
 				load: function (data) {
 					alert(data.msg);
@@ -117,7 +117,7 @@ function redrawNSDR(event,id,parentId) {
 		content: {
 			event: event,
 			uuid: uuid,
-			parentId: parentId,
+            parentId: parentId
 		},
 		load: function(data) {
 			if (event == 'delete') {

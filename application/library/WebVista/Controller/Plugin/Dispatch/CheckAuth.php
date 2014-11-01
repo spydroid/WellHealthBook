@@ -43,7 +43,7 @@ class WebVista_Controller_Plugin_Dispatch_CheckAuth extends Zend_Controller_Plug
 						break; // allow to check permission below
 					}
 				}
-				header('WWW-Authenticate: Basic realm="Unauthorized Access Prohibited (ClearHealth)"');
+				header('WWW-Authenticate: Basic realm="Unauthorized Access Prohibited (WellHealthBook)"');
 				header('HTTP/1.0 401 Unauthorized');
 				die(__('You must enter a valid username and password to access.'));
 			} while(false);

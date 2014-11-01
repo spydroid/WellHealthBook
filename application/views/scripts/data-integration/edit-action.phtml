@@ -41,7 +41,7 @@
 </div>
 
 <script>
-var defaultAction = (<r><![CDATA[<?=$this->action->defaultTemplate()?>]]></r>).toString();
+var defaultAction = <?=json_encode($this->action->defaultTemplate())?>;
 
 function postSubmit<?=$this->form->getId()?>(data) {
 <?if (strlen($this->callback) > 0):?>

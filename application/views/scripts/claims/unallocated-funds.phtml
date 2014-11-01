@@ -14,7 +14,7 @@ function deleteUnallocated() {
 		url: "<?=$this->baseUrl?>/claims.raw/process-delete-unallocated-funds",
 		handleAs: "json",
 		content: {
-			"paymentId": rowId,
+            "paymentId": rowId
 		},
 		load: function (data) {
 			if (data === false) {

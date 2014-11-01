@@ -4,10 +4,14 @@
 	<?=$this->formButton('cancelId',__('Cancel'),array('id'=>'cancelId','onClick'=>'immunizationBulkClose()'))?>
 </div>
 <script>
+<?php
+$immunizationLists = array();
+foreach($this->lists as $key=>$name) {
+    $immunizationLists[] = $key.': '.json_encode($name);
+}
+?>
 var immunizationLists = {
-<?foreach($this->lists as $key=>$name):?>
-	"<?=$key?>": (<r><![CDATA[<?=$name?>]]></r>).toString(),
-<?endforeach;?>
+    <?=implode(', ', $immunizationLists)?>
 };
 
 function immunizationBulkClose() {

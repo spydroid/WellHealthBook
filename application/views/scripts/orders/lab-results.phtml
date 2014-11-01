@@ -195,7 +195,7 @@ function labResultsProcessDelete(rowId) {
 		url: "<?=$this->baseUrl?>/orders.raw/process-delete-lab-result",
 		handleAs: "json",
 		content: {
-			"resultId": rowId,
+            "resultId": rowId
 		},
 		load: function (data) {
 			labResultsGridReload();

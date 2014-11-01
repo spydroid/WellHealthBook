@@ -85,7 +85,7 @@ function addSelectedFormulary() {
 			"formulary[qty]": qty,
 			//"formulary[keywords]": "",
 			"formulary[deaSchedule]": currentFormularyData.schedule,
-			"formulary[print]": print,
+            "formulary[print]": print
 		},
 		load: function (data) {
 			currentFormularyData = null;
@@ -118,7 +118,7 @@ function getFormularyCHMedDetails(arg) {
 	dojo.xhrPost({
 		url: '<?=$this->chBaseMed24DetailUrl?>',
 		content: {
-			'': pkey,
+            '': pkey
 		},
 		handleAs: 'json',
 		load: function (data) {
@@ -236,7 +236,7 @@ function formularySingleUpdate(field,id,value,callback) {
 			name: '<?=$this->tableName?>',
 			field: field,
 			id: id,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == 'function') {
@@ -288,7 +288,7 @@ function onFormularyMenuClicked(menuItemId,type) {
 				url: '<?=$this->baseUrl?>/formulary-manager.raw/process-delete-formulary',
 				content: {
 					'name': '<?=$this->tableName?>',
-					'formularyId': formulary[0],
+                    'formularyId': formulary[0]
 				},
 				handleAs: 'json',
 				load: function (data) {
@@ -326,7 +326,7 @@ function formularyUploadCSVFile() {
 		method: "post",
 		form: "uploadCSVForm",
 		content: {
-			"name": "<?=$this->tableName?>",
+            "name": "<?=$this->tableName?>"
 		},
 		load: function(data) {
 			if (data.error) {

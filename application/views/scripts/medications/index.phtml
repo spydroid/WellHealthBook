@@ -144,7 +144,7 @@ function onButtonClick(itemId) {
 			dojo.xhrPost({
 				url: "<?=$this->baseUrl?>/medications.raw/process-delete-medication",
 				content: {
-					"medicationId": medicationId,
+                    "medicationId": medicationId
 				},
 				handleAs: "json",
 				load: function (data) {
@@ -411,47 +411,6 @@ function rrGridOnRowSelected(rowId,cellIndex) {
 		prevMedicationId = medicationId;
 	}
 }
-
-/*
-var rrMenu = new dhtmlXMenuObject(null,"standard");
-rrMenu.setImagePath("<?=$this->baseUrl?>/img/");
-rrMenu.renderAsContextMenu();
-rrMenu.setOpenMode("web");
-rrMenu.attachEvent("onClick",rrGridOnContextMenu);
-rrMenu.loadXML("<?=$this->baseUrl?>/medications.xml/refills-context-menu");
-rrGrid.enableContextMenu(rrMenu);
-function rrGridOnContextMenu(item,rowId) {
-	var arr = rowId.split("_");
-	var medicationId = arr[0];
-	switch (item) {
-		case "approved":
-		case "approvedWithChanges":
-		case "denied":
-		case "deniedNewPrescriptionToFollow":
-			refillResponse(medicationId,item);
-			break;
-		default:
-			alert(item);
-	}
-}
-
-function refillResponse(medicationId,response) {
-	dojo.xhrPost({
-		url: "<?=$this->baseUrl?>/medications.raw/process-refill-response",
-		handleAs: "json",
-		content: {
-			"medicationId": medicationId,
-			"response": response
-		},
-		load: function (data) {
-			rrGridReload();
-		},
-		error: function (er) {
-			alert('err: ' + er);
-		}
-	});
-}
-*/
 
 function rrGridReload() {
 	rrGrid.clearAll();

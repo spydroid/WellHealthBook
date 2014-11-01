@@ -17,7 +17,7 @@ function allergiesMarkEnteredInError(rowId) {
 		url: "<?=$this->baseUrl?>/allergies.raw/process-mark-entered-in-error",
 		handleAs: "json",
 		content: {
-			id: rowId,
+            id: rowId
 		},
 		load: function (data) {
 			allergiesGridReload();
@@ -35,7 +35,7 @@ function allergiesMarkNoKnownAllergies() {
 		url: "<?=$this->baseUrl?>/allergies.raw/process-mark-no-known-allergies",
 		handleAs: "json",
 		content: {
-			personId: mainController.getActivePatient(),
+            personId: mainController.getActivePatient()
 		},
 		load: function (data) {
 			alert(data);

@@ -16,7 +16,7 @@ function updateManagerApply() {
 		url: "<?=$this->baseUrl?>/update-manager.raw/process-apply",
 		handleAs: "json",
 		content: {
-			"updateFileId": "<?=$this->updateFile->updateFileId?>",
+            "updateFileId": "<?=$this->updateFile->updateFileId?>"
 		},
 		load: function (response) {
 			if (response.error) {

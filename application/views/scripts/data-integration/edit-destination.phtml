@@ -47,7 +47,7 @@
 </div>
 
 <script>
-var defaultDestination = (<r><![CDATA[<?=$this->destination->defaultTemplate()?>]]></r>).toString();
+var defaultDestination = <?=json_encode($this->destination->defaultTemplate())?>;
 
 function postSubmit<?=$this->form->getId()?>(data) {
 <?if (strlen($this->callback) > 0):?>

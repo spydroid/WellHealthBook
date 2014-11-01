@@ -232,7 +232,7 @@ function eligCheck(id) {
 		url: "<?=$this->baseUrl?>/calendar.raw/process-check-eligibility",
 		handleAs: "json",
 		content: {
-			"id": id,
+            "id": id
 		},
 		load: function (data) {
 			if (data == false) {

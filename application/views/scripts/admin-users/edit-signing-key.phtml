@@ -18,7 +18,7 @@ function editSigningKeySubmit() {
 		content: {
 			"user[currentSignature]": currentSignature,
 			"user[newSignature]": newSignature,
-			"user[confirmNewSignature]": confirmNewSignature,
+            "user[confirmNewSignature]": confirmNewSignature
 		},
 		load: function (data) {
 			if (data == true) {
@@ -47,7 +47,7 @@ function validateKeySubmit() {
 		url: "<?=$this->baseUrl?>/admin-users.raw/validate-signing-key",
 		handleAs: "json",
 		content: {
-			"signature": currentSignature,
+            "signature": currentSignature
 		},
 		load: function (data) {
 			alert(data);

@@ -85,7 +85,7 @@ function hl7HandlerEditSingle(field,value,id) {
 		content: {
 			'id': parseInt(id),
 			'field': field,
-			'value': value,
+            'value': value
 		},
 		load: function (data) {
 			hl7HandlersGridReload();
@@ -148,7 +148,7 @@ function hl7DatasourcesCopy() {
 		handleAs: "json",
 		content: {
 			'id': rowId,
-			'type': <?=Handler::HANDLER_TYPE_HL7?>,
+            'type': <?=Handler::HANDLER_TYPE_HL7?>
 		},
 		load: function (data) {
 			hl7DatasourcesGridReload();

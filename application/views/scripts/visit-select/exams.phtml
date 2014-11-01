@@ -163,7 +163,7 @@ function examRemove(rowId) {
 		url: "<?=$this->baseUrl?>/exams.raw/process-delete-exam",
 		handleAs: "json",
 		content: {
-			"code": rowId,
+            "code": rowId
 		},
 		load: function (data) {
 			examsListGridReload();

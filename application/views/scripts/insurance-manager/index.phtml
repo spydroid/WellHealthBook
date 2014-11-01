@@ -15,7 +15,7 @@ function companySingleUpdate(id,field,value,type,objId,callback) {
 			type: type,
 			id: id,
 			field: field,
-			value: value,
+            value: value
 		},
 		load: function (data) {
 			if (typeof callback == "function") {
@@ -36,7 +36,7 @@ function companyRemove(id,type,objId,callback) {
 		content: {
 			objId: objId,
 			type: type,
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			if (typeof callback == "function") {
@@ -71,7 +71,7 @@ function insuranceDelete(id) {
 		handleAs: "json",
 		content: {
 			type: type,
-			id: id,
+            id: id
 		},
 		load: function (data) {
 			insuranceGridReload();
@@ -116,7 +116,7 @@ function insuranceAddCompany() {
 		url: "<?=$this->baseUrl?>/insurance-manager.raw/process-add-company",
 		handleAs: "json",
 		content: {
-			"company[name]": "--blank",
+            "company[name]": "--blank"
 		},
 		load: function (data) {
 			insuranceGridReload();
@@ -138,7 +138,7 @@ function insuranceAddProgram(companyId) {
 		handleAs: "json",
 		content: {
 			"program[companyId]": companyId,
-			"program[name]": "--blank",
+            "program[name]": "--blank"
 		},
 		load: function (data) {
 			insuranceGridReload();

@@ -21,7 +21,7 @@ function claimRulesDelete(id) {
 		url: "<?=$this->baseUrl?>/claim-rules.raw/process-delete-group",
 		handleAs: "json",
 		content: {
-			"groupId": id,
+            "groupId": id
 		},
 		load: function (data) {
 			claimRulesGridReload();

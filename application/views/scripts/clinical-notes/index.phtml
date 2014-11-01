@@ -274,7 +274,7 @@ dhtmlxEvent(cnGrid.entBox,"contextmenu",function(e){
 				handleAs: "json",
 				content: {
 					"clinicalNoteId": cnGrid.cells(rowId,indexCNNoteId).getValue(),
-					"revisionId": cnGrid.cells(rowId,indexCNRevisionId).getValue(),
+                    "revisionId": cnGrid.cells(rowId,indexCNRevisionId).getValue()
 				},
 				load: function (data) {
 					if (data === true) {

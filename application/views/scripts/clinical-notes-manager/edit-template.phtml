@@ -90,7 +90,7 @@ function noteTemplatePostSubmit(autoAdd) {
 		handleAs: "json",
 		form: "<?=$this->form->getId()?>",
 		content: {
-			"autoAdd": (autoAdd)?"1":"0",
+            "autoAdd": (autoAdd)?"1":"0"
 		},
 		load: function(data){
 			if (data.error) {

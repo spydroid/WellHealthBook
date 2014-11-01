@@ -49,7 +49,7 @@ function updateMgrDownload(msg) {
 		url: "<?=$this->baseUrl?>/update-manager.raw/download",
 		handleAs: "json",
 		content: {
-			"id": msg.id,
+            "id": msg.id
 		},
 		load: function (response) {
 			dojo.byId("updateMgrProgressId").innerHTML += " <?=__('done')?>.";
@@ -151,7 +151,7 @@ function updateMgrToolbarOnClick(id) {
 				url: "<?=$this->baseUrl?>/update-manager.raw/process-delete",
 				handleAs: "json",
 				content: {
-					"id": rowId,
+                    "id": rowId
 				},
 				load: function (response) {
 					updateMgrGridReload();

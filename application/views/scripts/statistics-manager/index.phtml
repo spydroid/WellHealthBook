@@ -54,7 +54,7 @@ function statsMgrDeleteStats(id) {
 		url: "<?=$this->baseUrl?>/statistics-manager.raw/process-delete",
 		handleAs: "json",
 		content: {
-			"id": id,
+            "id": id
 		},
 		load: function(data,ioArgs) {
 			if (data.error) {

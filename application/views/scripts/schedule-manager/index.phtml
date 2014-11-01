@@ -196,7 +196,7 @@ function scheduleTimeOnOK() {
 			"schedules[start]": timeStart,
 			"schedules[end]": timeEnd,
 			"schedules[title]": dojo.byId("title").value,
-			"schedules[buildingId]": buildingId,
+            "schedules[buildingId]": buildingId
 		},
 		load: function (data) {
 			scheduleGridGetEvent(data);
@@ -366,7 +366,7 @@ function scheduleCopy(from,to) {
 			"to": scheduleGrid.getColumnId(to),
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			scheduleFillColumn(to,data);
@@ -589,7 +589,7 @@ function scheduleRemove(rowId,cellIndex) {
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
 			"roomId": globRoomId,
-			"id": scheduleGrid.getUserData(rowId,cellIndex),
+            "id": scheduleGrid.getUserData(rowId,cellIndex)
 		},
 		load: function (data) {
 			scheduleFillColumn(cellIndex,data);
@@ -612,7 +612,7 @@ function scheduleClearDay(rowId,cellIndex) {
 			"weekday": scheduleGrid.getColumnId(cellIndex),
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			scheduleFillColumn(cellIndex,data);
@@ -652,7 +652,7 @@ function scheduleClearWeek(rowId,cellIndex) {
 		content: {
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			scheduleGridReload();
@@ -682,7 +682,7 @@ function scheduleSaveTemplate() {
 			"templateName": templateName,
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			var arr = schedToolbar.getAllListOptions("loadTemplate");
@@ -703,7 +703,7 @@ function loadScheduleTemplate(data) {
 			"templateId": parseInt(data),
 			"scheduleDate": formatScheduleDate(boxScheduleDate.getValue()),
 			"providerId": globProviderId,
-			"roomId": globRoomId,
+            "roomId": globRoomId
 		},
 		load: function (data) {
 			scheduleGridReload();

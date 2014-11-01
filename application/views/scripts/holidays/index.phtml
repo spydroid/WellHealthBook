@@ -87,7 +87,7 @@ function holidayRemove(rowId) {
 		url: globalBaseUrl+"/holidays.raw/process-delete",
 		handleAs: "json",
 		content: {
-			"id": rowId,
+            "id": rowId
 		},
 		load: function (data) {
 			holidayGridReload();
@@ -112,7 +112,7 @@ function holidaySave(rowId) {
 		content: {
 			"holiday[holidayId]": rowId,
 			"holiday[date]": holidayGrid.cells(rowId,indexSchedHolDate).getValue(),
-			"holiday[description]": holidayGrid.cells(rowId,indexSchedHolDescription).getValue(),
+            "holiday[description]": holidayGrid.cells(rowId,indexSchedHolDescription).getValue()
 		},
 		load: function (data) {
 			holidayGridReload();
