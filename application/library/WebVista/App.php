@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  App.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       App.php
 *
@@ -78,7 +90,8 @@ class WebVista {
 		$this->_config = new Zend_Config_Ini($this->getPath('application') . "/config/app.ini", APPLICATION_ENVIRONMENT);
 		Zend_Registry::set('config', $this->_config);
 		Zend_Registry::set('baseUrl',substr($_SERVER['PHP_SELF'],0,strpos(strtolower($_SERVER['PHP_SELF']),'index.php')));
-		Zend_Registry::set('basePath',$this->getPath('base') . DIRECTORY_SEPARATOR);
+        Zend_Registry::set('rootPath', $this->getPath('base') . DIRECTORY_SEPARATOR);
+        Zend_Registry::set('basePath', Zend_Registry::get('rootPath') . 'public' . DIRECTORY_SEPARATOR);
 		try {
 			date_default_timezone_set(Zend_Registry::get('config')->date->timezone);
 		}
@@ -216,20 +229,11 @@ class WebVista {
         $cache = Zend_Cache::factory('Core', 'Memcached', $frontendOptions, $backendOptions);
         Zend_Registry::set('memcache', $cache);
 	*/
-
+        $cacheDir = Zend_Registry::get('rootPath').'cache'.DIRECTORY_SEPARATOR;
         $frontendOptions = array('lifetime' => 3600, 'automatic_serialization' => true);
-        $backendOptions = array('file_name_prefix' => 'clearhealth', 'hashed_directory_level' => 1, 'cache_dir' => '/tmp/', 'hashed_directory_umask' => 0700);
+        $backendOptions = array('file_name_prefix' => 'spydroid', 'hashed_directory_level' => 1, 'cache_dir' => $cacheDir, 'hashed_directory_umask' => 0700);
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-        Zend_Registry::set('cache', $cache);
-
-	$memcache = new Memcache();
-	$memcache->connect('127.0.0.1',11211);
-	$status = $memcache->getServerStatus('127.0.0.1',11211);
-	if ($status === 0) {
-		// memcache server failed, do error trapping?
-	}
-	Zend_Registry::set('memcache', $memcache);
-	Zend_Registry::set('memcacheStatus', $status);
+        Zend_Registry::set('cache', new SpyDroid_Cache($cache));
 
         return $this;
     }
@@ -245,16 +249,16 @@ class WebVista {
 
 	protected function _setupAcl() {
 		//$aclBuilder = new WebVista_AclBuilder();
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 
 		$key = 'acl';
-		$acl = $memcache->get($key);
+        $acl = $cache->get($key);
 		if ($acl === false) {
 			$acl = WebVista_Acl::getInstance();
 			// populate acl from db
 			$acl->populate();
-			// save to memcache
-			$memcache->set($key,$acl);
+			// save to cache
+            $cache->set($key, $acl);
 		}
 		Zend_Registry::set('acl',$acl);
 		return $this;

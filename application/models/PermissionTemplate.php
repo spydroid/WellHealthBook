@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  PermissionTemplate.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       PermissionTemplate.php
 *
@@ -50,27 +62,29 @@ class PermissionTemplate extends WebVista_Model_ORM {
 		return $this;
 	}
 
-	public static function serviceStatus() {
-		$memcache = Zend_Registry::get('memcache');
-		return $memcache->get(self::$_statusKey);
-	}
+    public static function serviceStatus()
+    {
+        $cache = Zend_Registry::get('cache');
+        return $cache->get(self::$_statusKey);
+    }
 
 	public static function serviceReload() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[3]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[3]);
 		self::serviceStop();
 		self::serviceStart();
-		$memcache->set(self::$_statusKey,self::$_states[2]);
+        $cache->set(self::$_statusKey, self::$_states[2]);
 	}
 
-	public static function serviceStop() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->delete(self::$_statusKey,0);
-	}
+    public static function serviceStop()
+    {
+        $cache = Zend_Registry::get('cache');
+        $cache->delete(self::$_statusKey, 0);
+    }
 
 	public static function serviceStart() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[1]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[1]);
 		$permissionTemplate = new self();
 		$permissionTemplateIterator = $permissionTemplate->getIterator();
 		foreach ($permissionTemplateIterator as $permission) {
@@ -85,7 +99,7 @@ class PermissionTemplate extends WebVista_Model_ORM {
 							$arrResources[$value] = array($key=>$access);
 						}
 						$memKey = hash('sha256',self::ACL_MEMKEY.'_'.$permission->permissionTemplateId.'_'.$resourceName);
-						$memcache->set($memKey,$arrResources);
+                        $cache->set($memKey, $arrResources);
 					}
 				}
 			}
@@ -93,7 +107,7 @@ class PermissionTemplate extends WebVista_Model_ORM {
 				trigger_error($e->getMessage(),E_USER_NOTICE);
 			}
 		}
-		$memcache->set(self::$_statusKey,self::$_states[0]);
+        $cache->set(self::$_statusKey, self::$_states[0]);
 	}
 
 	public function buildTemplate(Array $templates,$moduleName='default') {
@@ -118,13 +132,13 @@ class PermissionTemplate extends WebVista_Model_ORM {
 	}
 
 	public static function hasAccess($permissionTemplateId,$controllerName,$actionName) {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$ret = false;
 
 		$controller = str_replace(' ','',ucwords(strtr($controllerName,'-.','  ')));
 		$action = lcfirst(str_replace(' ','',ucwords(strtr($actionName,'-.','  '))));
 		$memKey = hash('sha256',self::ACL_MEMKEY.'_'.$permissionTemplateId.'_'.$controller);
-		$resources = $memcache->get($memKey);
+        $resources = $cache->get($memKey);
 		if ($resources !== false && isset($resources[$action])) {
 			list($k,$v) = each($resources[$action]);
 			if ($v) {

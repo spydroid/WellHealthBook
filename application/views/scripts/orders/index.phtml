@@ -37,10 +37,10 @@ orderFilterGrid.init();
 
 var filters = {
 	"rows": [
-		{"id":"active","data":[(<r><![CDATA[ <?=__('Active Orders (includes Pending & Recent Activity) - ALLSERVICES')?> ]]></r>).toString()]},
-		{"id":"current","data":[(<r><![CDATA[ <?=__('Current Orders (Active & Pending status only)')?> ]]></r>).toString()]},
-		{"id":"expiring","data":[(<r><![CDATA[ <?=__('Expiring Orders')?> ]]></r>).toString()]},
-		{"id":"unsigned","data":[(<r><![CDATA[ <?=__('Unsigned Orders')?> ]]></r>).toString()]},
+		{"id":"active","data":['Active Orders (includes Pending & Recent Activity) - ALLSERVICES']},
+		{"id":"current","data":['Current Orders (Active & Pending status only)']},
+		{"id":"expiring","data":['Expiring Orders']},
+		{"id":"unsigned","data":['Unsigned Orders']}
 		/*{"id":"recently_expired","data":[(<r><![CDATA[ <?=__('Recently Expired Orders')?> ]]></r>).toString()]},*/
 	]
 };
@@ -67,9 +67,9 @@ orderWriteGrid.init();
 var writeOrders = {
 	"rows": [
 		/*{"id":"common-orders","data":[(<r><![CDATA[ <?=__('Common Orders')?> ]]></r>).toString()]},*/
-		{"id":"lab-test","data":[(<r><![CDATA[ <?=__('Lab Test')?> ]]></r>).toString()]},
-		{"id":"imaging","data":[(<r><![CDATA[ <?=__('Imaging')?> ]]></r>).toString()]},
-		{"id":"text-order","data":[(<r><![CDATA[ <?=__('Text Only Order')?> ]]></r>).toString()]},
+		{"id":"lab-test","data":['Lab Test']},
+		{"id":"imaging","data":['Imaging']},
+		{"id":"text-order","data":['Text Only Order']}
 	]
 };
 orderWriteGrid.parse(writeOrders,"json");
@@ -211,7 +211,7 @@ function orderProcess(action,rowId) {
 		url: "<?=$this->baseUrl?>/orders.raw/process-"+action,
 		handleAs: "json",
 		content: {
-			"orderId": rowId,
+			"orderId": rowId
 		},
 		load: function (data) {
 			orderListGridReload();

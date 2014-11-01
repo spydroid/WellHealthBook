@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  TemplateTextController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       TemplateTextController.php
 *
@@ -79,12 +91,7 @@ class TemplateTextController extends WebVista_Controller_Action {
 		if (count($matches[1]) > 0) {
 		        foreach ($matches[1] as $val) {
 				$namespace = str_replace('[selectedPatientId]',$personId,$val);
-				if (Zend_Registry::get('memcacheStatus') === 0) {
-					$resultValue = __("Memcache server not started");
-				}
-				else {
-					$resultValue = NSDR2::populate($namespace);
-				}
+				$resultValue = NSDR2::populate($namespace);
 				$template = preg_replace('/{nsdr:(.*)}/',$resultValue,$template,1);
 		        }
 		}

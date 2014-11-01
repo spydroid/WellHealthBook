@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  AdminServicesController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       AdminServicesController.php
 *
@@ -39,8 +51,8 @@ class AdminServicesController extends WebVista_Controller_Action {
 			$rows[] = $tmp;
 		}
 
-		$memcache = Zend_Registry::get('memcache');
-		$serviceNominal = $memcache->get(Service::SERVICE_NOMINAL);
+        $cache = Zend_Registry::get('cache');
+        $serviceNominal = $cache->get(Service::SERVICE_NOMINAL);
 		$rows[0]['userdata']['serviceNominal'] = $serviceNominal;
 		$json = Zend_Controller_Action_HelperBroker::getStaticHelper('json');
 		$json->suppressExit = true;

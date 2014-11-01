@@ -1065,6 +1065,9 @@ dhtmlXToolbarObject.prototype._buttonObject = function(that, id, data, pos) {
 	this.getItemToolTip = function() {
 		return this.obj.title;
 	}
+    /* Start WellHealthBook Hack */
+    WHB_Util.fixScriptInnerHTML(this.obj);
+    /* End WellHealthBook Hack */
 	return this;
 }
 //#tool_list:06062008{
@@ -1578,6 +1581,9 @@ dhtmlXToolbarObject.prototype._buttonSelectObject = function(that, id, data, pos
 		for (var a in this._listOptions) { if (this._listOptions[a]._selected == true) { id = a; } }
 		return id;
 	}
+    /* Start WellHealthBook Hack */
+    WHB_Util.fixScriptInnerHTML(this.obj);
+    /* End WellHealthBook Hack */
 	//
 	return this;
 }
@@ -1653,6 +1659,9 @@ dhtmlXToolbarObject.prototype._buttonInputObject = function(that, id, data, pos)
 	this.getItemToolTip = function() {
 		return this.obj.title;
 	}
+    /* Start WellHealthBook Hack */
+    WHB_Util.fixScriptInnerHTML(this.obj);
+    /* End WellHealthBook Hack */
 	//
 	return this;
 }
@@ -1820,6 +1829,9 @@ dhtmlXToolbarObject.prototype._buttonTwoStateObject = function(that, id, data, p
 	this.getItemToolTip = function() {
 		return this.obj.title;
 	}
+    /* Start WellHealthBook Hack */
+    WHB_Util.fixScriptInnerHTML(this.obj);
+    /* End WellHealthBook Hack */
 	//
 	return this;
 }
@@ -2035,6 +2047,9 @@ dhtmlXToolbarObject.prototype._sliderObject = function(that, id, data, pos) {
 	this.getItemToolTipTemplate = function() {
 		return this.obj.pen.label.tip;
 	}
+    /* Start WellHealthBook Hack */
+    WHB_Util.fixScriptInnerHTML(this.obj);
+    /* End WellHealthBook Hack */
 	//
 	return this;
 }

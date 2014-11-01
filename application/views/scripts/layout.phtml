@@ -33,6 +33,7 @@ function globalProcessGeneric(action,content,callback) {
 	});
 }
 </script>
+    <script type="text/javascript" src="<?=$this->baseUrl?>/js/spydroid.js"></script>
 <?=$this->headTitle() ?>
 <?if ($this->authenticated):?>
 <?=$this->headLink() ?>
@@ -76,7 +77,7 @@ if (window.teamSelectorClass) {
 </script>
 
 <?if ($this->authenticated):?>
-<div id="systemsWarning" style="width:100%;background-color:#ECE9D8;text-align:right;color:red;<?=(Zend_Registry::get('memcache')->get(Service::SERVICE_NOMINAL))?'display:none;':''?>"><?=__('Please contact your administrator, services needed for some features are not running. You may experience errors if you continue.')?></div>
+<div id="systemsWarning" style="width:100%;background-color:#ECE9D8;text-align:right;color:red;<?=(Zend_Registry::get('cache')->get(Service::SERVICE_NOMINAL))?'display:none;':''?>"><?=__('Please contact your administrator, services needed for some features are not running. You may experience errors if you continue.')?></div>
 <?endif;?>
 <div id="mainContentLayout">
 <?if ($this->authenticated):?>

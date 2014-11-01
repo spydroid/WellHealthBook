@@ -2237,3 +2237,15 @@ dhtmlXMenuObject.prototype.setItemSelected = function(id) {
 	// console.log(this.itemPull[this.idPrefix+id]);
 	
 }
+
+
+/* Start WellHealthBook Hack */
+dhtmlXMenuObject.prototype.clearAll = function() {
+    for (var a in this.itemPull) {
+        if (this.itemPull[a]["parent"] == this.idPrefix+this.topId) {
+            this.removeItem(String(a).replace(this.idPrefix, ""));
+        }
+    }
+    this._isInited = false;
+}
+/* End WellHealthBook Hack */

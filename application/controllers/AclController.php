@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  AclController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       AclController.php
 *
@@ -24,14 +36,14 @@
 
 class AclController extends WebVista_Controller_Action {
 
-	protected $_memcache = null;
+    protected $_cache = null;
 	protected $_chkLabelRead = 'chkRead';
 	protected $_chkLabelWrite = 'chkWrite';
 	protected $_chkLabelDelete = 'chkDelete';
 	protected $_chkLabelOther = 'chkOther';
 
 	public function init() {
-		$this->_memcache = Zend_Registry::get('memcache');
+        $this->_cache = Zend_Registry::get('cache');
 	}
 
 	public function indexAction() {
@@ -47,12 +59,12 @@ class AclController extends WebVista_Controller_Action {
 
 	protected function _generateDefaultTemplateXML() {
 		$aclMemKey = PermissionTemplate::ACL_MEMKEY.'_default';
-		$items = $this->_memcache->get($aclMemKey); // get returns FALSE if error or key not found
+        $items = $this->_cache->get($aclMemKey); // get returns FALSE if error or key not found
 		if ($items === false) {
 			trigger_error("before generating list: " . calcTS(),E_USER_NOTICE);
 			$xml = WebVista_Acl::getInstance()->getDefaultList();
 			$items = $xml->asXML();
-			$this->_memcache->set($aclMemKey,$items);
+            $this->_cache->set($aclMemKey, $items);
 			trigger_error("after generating list: " .calcTS(),E_USER_NOTICE);
 		}
 		if (!isset($xml)) {
@@ -132,12 +144,12 @@ class AclController extends WebVista_Controller_Action {
 		$acl = WebVista_Acl::getInstance();
 		// populate acl from db
 		$acl->populate();
-		// save to memcache
-		$this->_memcache->set('acl',$acl);
+        // save to cache
+        $this->_cache->set('acl', $acl);
 		Zend_Registry::set('acl',$acl);
 
 		$items = $acl->getLists();
-		$this->_memcache->set(PermissionTemplate::ACL_MEMKEY,$items);
+        $this->_cache->set(PermissionTemplate::ACL_MEMKEY, $items);
 		ACLAPI::saveACLItems($items);
 
 		$data = array();
@@ -200,12 +212,12 @@ class AclController extends WebVista_Controller_Action {
 		$acl = WebVista_Acl::getInstance();
 		// populate acl from db
 		$acl->populate();
-		// save to memcache
-		$this->_memcache->set('acl',$acl);
+        // save to cache
+        $this->_cache->set('acl', $acl);
 		Zend_Registry::set('acl',$acl);
 
 		$items = $acl->getLists();
-		$this->_memcache->set(PermissionTemplate::ACL_MEMKEY,$items);
+        $this->_cache->set(PermissionTemplate::ACL_MEMKEY, $items);
 		ACLAPI::saveACLItems($items);
 
 		$data = array();
@@ -339,7 +351,7 @@ class AclController extends WebVista_Controller_Action {
 		else {
 			if ($isDefault) {
 				$aclMemKey = PermissionTemplate::ACL_MEMKEY.'_default';
-				$this->_memcache->set($aclMemKey,$xml->asXML());
+                $this->_cache->set($aclMemKey, $xml->asXML());
 			}
 			else {
 				$permissionTemplate->template = $xml->asXML();

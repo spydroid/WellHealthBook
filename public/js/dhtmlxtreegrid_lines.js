@@ -61,6 +61,9 @@ dhtmlXGridObject.prototype.enableTreeGridLines=function(){
 		this._redrawLines(0)	
 	} 
 	this._redrawLines=function(id){
+        /* Start WellHealthBook Hack */
+        if (this._h2)
+        /* End WellHealthBook Hack */
 		this._h2.forEachChild((id||0),function(z){
 				this._updateLine(z);
 				this._updateParentLine(z);

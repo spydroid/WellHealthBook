@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  NsdrController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       NsdrController.php
 *
@@ -27,8 +39,8 @@
  */
 class NsdrController extends WebVista_Controller_Action {
 
-	// memcache handler
-	protected $_memcache = null;
+    // cache handler
+    protected $_cache = null;
 
 	// supported methods
 	protected $_supportedMethods = array('GET','POST','XML','JSON');
@@ -51,8 +63,8 @@ class NsdrController extends WebVista_Controller_Action {
 	 * taken from the REQUEST_URI
 	 */
 	public function init() {
-		// retrieves memcache from registry and assign it in this
-		$this->_memcache = Zend_Registry::get('memcache');
+        // retrieves cache from registry and assign it in this
+        $this->_cache = Zend_Registry::get('cache');
 
 		// work-around for namespace as part of the URL's key
 		$requestUri = $_SERVER['REQUEST_URI'];
@@ -165,9 +177,9 @@ class NsdrController extends WebVista_Controller_Action {
 			return $result;
 		}
 		$nsdrMethodName = $matches[1];
-		if ($method = $this->_memcache->get($key)) { // get returns FALSE if error or key not found
+        if ($method = $this->_cache->get($key)) { // get returns FALSE if error or key not found
 			$nsdrBase = new NSDRBase();
-			// create anonymous function and use the code from memcache
+            // create anonymous function and use the code from cache
 			$anonFunc = create_function('$tthis',$method);
 			if ($anonFunc === false) {
 				return $result;
@@ -205,7 +217,7 @@ class NsdrController extends WebVista_Controller_Action {
 
 	/**
 	 * Argument to this action is either of the following:
-	 * 1) start - starts the system, push namespace datapoint definition into memcached from database store
+     * 1) start - starts the system, push namespace datapoint definition into cached from database store
 	 * 2) reload - reloads the system
 	 * 3) unload - unloads the system
 	 * 4) status - get the status on the system, returns state of the system

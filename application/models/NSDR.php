@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  NSDR.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       NSDR.php
 *
@@ -35,7 +47,7 @@ class NSDR {
 
 	public static function populate($request) {
 		$nsdrDefinitions = array();
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		// enclosed it in array if $request is not an array
 		if (!is_array($request)) {
 			$request = array($request);
@@ -50,7 +62,7 @@ class NSDR {
 			}
 
 			// check if $data has a cached entry
-			$result = $memcache->get($data);
+            $result = $cache->get($data);
 			if ($result !== false) { // has cached entry
 				// use the cache entry
 				$ret[$data] = $result;
@@ -89,7 +101,7 @@ class NSDR {
 				}
 				if (strlen($nsdr->aliasFor) > 0) {
 					$nsdrBase->_aliasedNamespace = $nsdr->aliasFor;
-					if ($nsdrAlias = $memcache->get($nsdr->aliasFor)) {
+                    if ($nsdrAlias = $cache->get($nsdr->aliasFor)) {
 						if (!self::isORM($nsdrAlias)) {
 							$ret[$data] = $nsdrAlias;
 							continue;
@@ -193,9 +205,9 @@ class NSDR {
 	}
 
 	protected static function getNSDRORMMethod(NSDRBase $nsdrBase,$key,$context,$method,$data=null) {
-		$memcache = Zend_Registry::get('memcache');
-		// check to see if key exists in memcache
-		$result = $memcache->get($key);
+        $cache = Zend_Registry::get('cache');
+        // check to see if key exists in cache
+        $result = $cache->get($key);
 		preg_match("/(.*)\((.*)\)/",$method,$matches);
 		$methodName = $matches[1];
 		$contextArray[$context] = array('filters' => array());
@@ -283,12 +295,12 @@ class NSDR {
 	}
 
 	protected static function getNSDRMethod(NSDRBase $nsdrBase,$key,$context,$data=null) {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 
-		// check to see if key exists in memcache
-		$result = $memcache->get($key);
+        // check to see if key exists in cache
+        $result = $cache->get($key);
 		if ($result === false) { // key not found
-			return array('error'=>__('key does not exists in memcached'));
+            return array('error'=>__('key does not exists in cached'));
 		}
 		if (!isset($nsdrBase->methods[$key])) {
 			preg_match('/\[(.*\(\))+\]$/',$key,$matches);
@@ -301,9 +313,9 @@ class NSDR {
 				}
 			}
 			else { // no function exists
-				// check to see if key exists in memcache
+                // check to see if key exists in cache
 				$keyWithContext = $context . '::' . $key;
-				$resultKeyWithContext = $memcache->get($keyWithContext);
+                $resultKeyWithContext = $cache->get($keyWithContext);
 				if ($resultKeyWithContext === false) { // key not found
 					$keyWithMethod = $key . '[populate()]';
 					if (!isset($nsdrBase->methods[$keyWithMethod])) {
@@ -329,8 +341,8 @@ class NSDR {
 	}
 
 	public static function systemStart() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[1]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[1]);
 
 		// By default all NSDR methods will return an empty/false value
 		$methods = array(
@@ -361,38 +373,38 @@ class NSDR {
 				else if ($ORMClass !== null) {
 					$value = $ORMClass; // override $value
 				}
-				$memcache->set($key,$value);
+                $cache->set($key, $value);
 			}
 		}
 
-		$memcache->set(self::$_statusKey,self::$_states[0]);
+        $cache->set(self::$_statusKey, self::$_states[0]);
 	}
 
 	public static function systemReload() {
 		$ret = false;
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[3]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[3]);
 		self::systemUnload();
 		self::systemStart();
 		$ret = true;
-		$memcache->set(self::$_statusKey,self::$_states[2]);
+        $cache->set(self::$_statusKey, self::$_states[2]);
 		return $ret;
 	}
 
 	public static function systemUnload() {
 		$ret = false;
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[5]);
-		$memcache->flush();
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[5]);
+        $cache->flush();
 		$ret = true;
-		$memcache->set(self::$_statusKey,self::$_states[4]);
+        $cache->set(self::$_statusKey, self::$_states[4]);
 		return $ret;
 	}
 
 	public static function systemStatus() {
-		$memcache = Zend_Registry::get('memcache');
-		// retrieve status info from memcache
-		return $memcache->get(self::$_statusKey);
+        $cache = Zend_Registry::get('cache');
+        // retrieve status info from cache
+        return $cache->get(self::$_statusKey);
 	}
 
 	public static function generateTestData() {

@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  Service.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       Service.php
 *
@@ -92,15 +104,15 @@ class Service {
 		$service['status'] = ucwords($status);
 		$services[$id] = $service;
 
-		$memcache = Zend_Registry::get('memcache');
-		$serviceNominal = $memcache->get(self::SERVICE_NOMINAL);
+        $cache = Zend_Registry::get('cache');
+        $serviceNominal = $cache->get(self::SERVICE_NOMINAL);
 		if ($ok) {
-			$memcache = Zend_Registry::get('memcache');
-			$memcache->set(self::SERVICE_NOMINAL,true);
+            $cache = Zend_Registry::get('cache');
+            $cache->set(self::SERVICE_NOMINAL, true);
 		}
 		else {
 			if ($serviceNominal !== false) {
-				$memcache->delete(self::SERVICE_NOMINAL,0);
+                $cache->delete(self::SERVICE_NOMINAL, 0);
 			}
 		}
 		return $services;

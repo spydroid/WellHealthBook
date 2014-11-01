@@ -56,15 +56,11 @@ JSDashboardComponent.prototype.actionLinkDisplay = function() {
 function PHPDashboardComponent() {};
 PHPDashboardComponent.prototype = new DashboardComponent();
 PHPDashboardComponent.prototype.render = function () {
-    dashboardInnerLayout.cells(this.cellId).attachURL(baseUrl +
-    'provider-dashboard/render-PHP-dashboard-component?dashboardComponentId=' + this.dashboardComponentId 
-    + '&actionn=render');
+    dashboardInnerLayout.cells(this.cellId).attachURL('<?=$this->baseUrl?>/provider-dashboard/render-PHP-dashboard-component?dashboardComponentId=' + this.dashboardComponentId + '&actionn=render');
 }
 
 PHPDashboardComponent.prototype.refresh = function () {
-    dashboardInnerLayout.cells(this.cellId).attachURL(baseUrl +
-    'provider-dashboard/render-PHP-dashboard-component?dashboardComponentId=' + this.dashboardComponentId 
-    + '&actionn=refresh&personId=' + this.personId);
+    dashboardInnerLayout.cells(this.cellId).attachURL('<?=$this->baseUrl?>/provider-dashboard/render-PHP-dashboard-component?dashboardComponentId=' + this.dashboardComponentId + '&actionn=refresh&personId=' + this.personId);
 }
 PHPDashboardComponent.prototype.actionLink = function() {
 	return false;
@@ -78,10 +74,10 @@ function URLDashboardComponent() {};
 URLDashboardComponent.prototype = new DashboardComponent();
 
 URLDashboardComponent.prototype.render = function () {
-    dashboardInnerLayout.cells(this.cellId).attachURL(baseUrl + this.content);
+    dashboardInnerLayout.cells(this.cellId).attachURL("<?=$this->baseUrl?>/" + this.content);
 }
 URLDashboardComponent.prototype.refresh = function () {
-    dashboardInnerLayout.cells(this.cellId).attachURL(baseUrl + this.content + '?personId=' + this.personId);
+    dashboardInnerLayout.cells(this.cellId).attachURL("<?=$this->baseUrl?>/" + this.content + '?personId=' + this.personId);
 }
 URLDashboardComponent.prototype.actionLink = function() {
 	return false;
@@ -98,7 +94,7 @@ function DashboardComponentMarshall() {
     this.intervalId;
 };
 DashboardComponentMarshall.prototype.render = function () {
-    dashboardInnerLayout.cells(this.cellId).attachURL(baseUrl + this.content);
+    dashboardInnerLayout.cells(this.cellId).attachURL("<?=$this->baseUrl?>/" + this.content);
 }
 DashboardComponentMarshall.prototype.init = function (dashboardComponents) {
         if (dashboardComponents.length < 1) { this.addPanes(); return; }
@@ -436,7 +432,7 @@ function windowSelectDashComponent(cellId) {
     dashboardInnerLayout.dhxWins.setSkin('clear_silver');
 
     winDC.setText("<?=__('Select Dashboard Component');?>");
-    winDC.attachURL(baseUrl + '/provider-dashboard.raw/dwpopup',true);
+    winDC.attachURL('<?=$this->baseUrl?>/provider-dashboard.raw/dwpopup', true);
     winDC.setModal(true);
     winDC.centerOnScreen();
     callerCellId = cellId;

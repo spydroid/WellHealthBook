@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  MainToolbarController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       MainToolbarController.php
 *
@@ -78,15 +90,15 @@ class MainToolbarController extends WebVista_Controller_Action {
 
 	public function _setActivePatient($personId,$visitId) {
 		if (!$personId > 0) return;
-		$memcache = Zend_Registry::get('memcache');
-                $patient = new Patient();
-                $patient->personId = (int)$personId;
-                $patient->populate();
-		$patient->person->populate();
-                $this->_patient = $patient;
+        $cache = Zend_Registry::get('cache');
+        $patient = new Patient();
+        $patient->personId = (int)$personId;
+        $patient->populate();
+        $patient->person->populate();
+        $this->_patient = $patient;
 		$this->view->patient = $this->_patient;
 
-		$mostRecentRaw = $memcache->get('mostRecent');
+        $mostRecentRaw = $cache->get('mostRecent');
 		$currentUserId = (int)Zend_Auth::getInstance()->getIdentity()->personId;
 		$personId = $patient->personId;
 		$teamId = $patient->teamId;
@@ -94,7 +106,7 @@ class MainToolbarController extends WebVista_Controller_Action {
 			$mostRecent = array();
 		}
 		else {
-			$mostRecent = unserialize($mostRecentRaw);
+            $mostRecent = $mostRecentRaw;
 		}
 		if (!array_key_exists($currentUserId,$mostRecent)) {
 			$mostRecent[$currentUserId] = array();
@@ -104,7 +116,7 @@ class MainToolbarController extends WebVista_Controller_Action {
 		}
 		$name = $patient->person->last_name . ', ' . $patient->person->first_name . ' ' . substr($patient->person->middle_name,0,1) . ' #' . $patient->record_number;
 		$mostRecent[$currentUserId][$patient->personId] = array('name'=>$name,'teamId'=>$teamId);
-		$memcache->set('mostRecent',serialize($mostRecent));
+        $cache->set('mostRecent', $mostRecent);
 
 		if (strlen($patient->teamId) > 0) {
 

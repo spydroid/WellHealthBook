@@ -149,6 +149,9 @@ mainFileLoaderClass.prototype.onLoadingCompleted = function() {
 			handleAs: "text",
 			load: function(data, ioArgs) {
 				dojo.setInnerHTML(dojo.byId('mainContentLayout'),data);
+                /* Start WellHealthBook Hack */
+                WHB_Util.setInnerHTMLDojo(dojo.byId('mainContentLayout'), data);
+                /* End WellHealthBook Hack */
 				return data;
 			},
 			error: function(response, ioArgs) {
@@ -271,7 +274,10 @@ mainControllerClass.prototype.startTimer = function() {
 	interval = 360000000;
 	if (globalAutologout > 0) interval = globalAutologout * minute;
 	globalLogoutPopupWarning = false;
-	setTimeout("if (!globalLogoutPopupWarning) { alert('You are about to automatically logout in 2 minutes.'); globalLogoutPopupWarning = true; }",(interval - (2 * minute)));
+    /* Start WellHealthBook Hack */
+    // setTimeout("if (!globalLogoutPopupWarning) { alert('You are about to automatically logout in 2 minutes.'); globalLogoutPopupWarning = true; }",(interval - (2 * minute)));
+    globalLogoutNotice = setTimeout("if (!globalLogoutPopupWarning) { alert('You are about to automatically logout in 2 minutes.'); globalLogoutPopupWarning = true; clearTimeout(globalLogoutNotice); globalLogoutNotice = null; }",(interval - (2 * minute)));
+    /* End WellHealthBook Hack */
 	globalLogoutTimer = setTimeout("mainController.forcedLogout()",interval);
 };
 mainControllerClass.prototype.forcedLogout = function() {
@@ -1019,8 +1025,6 @@ visitSelectorClass.prototype.oWindow = null;
 visitSelectorClass.prototype.oAccordion = null;
 visitSelectorClass.prototype.oVisitDetailsTabbar = null;
 visitSelectorClass.prototype.cacheAddSelectVisit = null;
-visitSelectorClass.prototype.accordionCacheContent = [];
-visitSelectorClass.prototype.visitDetailsTabbarCacheContent = [];
 
 visitSelectorClass.prototype.accordionAddSelectVisitId = "accordionAddSelectVisit";
 visitSelectorClass.prototype.accordionVisitDetailsId = "accordionVisitDetails";
@@ -1120,14 +1124,6 @@ visitSelectorClass.prototype.openWindow = function() {
 	this.oVisitDetailsTabbar.addTab(this.tabExamsId,"Exams","95");
 
 	this.oVisitDetailsTabbar.setOnSelectHandler(function(id){
-		/*
-		for (var i in thisClass.visitDetailsTabbarCacheContent) {
-			if (thisClass.visitDetailsTabbarCacheContent[i].id == id) {
-				thisClass.oVisitDetailsTabbar.setContent(id,thisClass.visitDetailsTabbarCacheContent[i].objContent);
-				return true;
-			}
-		}
-		*/
 		switch(id) {
 			case thisClass.tabVisitTypeId:
 				thisClass.visitDetailsTabbarGetContent(id,globalBaseUrl+"/visit-select.raw/visit-details");
@@ -1176,18 +1172,16 @@ visitSelectorClass.prototype.accordionOpen = function(id) {
 
 visitSelectorClass.prototype.visitDetailsTabbarGetContent = function(id,url) {
 	var thisClass = this;
-	this.attachContent(id,url,function(obj){
-			thisClass.oVisitDetailsTabbar.setContent(id,obj);
-			thisClass.visitDetailsTabbarCacheContent[thisClass.visitDetailsTabbarCacheContent.length] = {id:id,objContent:obj};
-		});
+    this.attachContent(id,url,function(obj){
+        thisClass.oVisitDetailsTabbar.setContent(id,obj);
+    });
 };
 
 visitSelectorClass.prototype.accordionGetContent = function(id,url) {
 	var thisClass = this;
 	this.attachContent(id,url,function(obj){
-			thisClass.oAccordion.cells(id).attachObject(obj);
-			thisClass.accordionCacheContent[thisClass.accordionCacheContent.length] = {id:id,objContent:obj};
-		});
+        thisClass.oAccordion.cells(id).attachObject(obj);
+    });
 };
 
 visitSelectorClass.prototype.attachContent = function(id,url,callback) {
@@ -1202,6 +1196,11 @@ visitSelectorClass.prototype.attachContent = function(id,url,callback) {
 			if (typeof callback == "function") {
 				callback(newDiv);
 			}
+            /* Start WellHealthBook Hack */
+            else {
+                WHB_Util.fixScriptInnerHTML(newDiv);
+            }
+            /* End WellHealthBook Hack */
 			return data;
 		},
 		error: function(response, ioArgs) {

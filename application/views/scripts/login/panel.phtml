@@ -65,7 +65,7 @@ function onLoadingComplete() {
 document.getElementById("mainLayoutContainerId").style.display = "none";
 </script>
 <div id="loginContainer">
-    <div id="systemsWarning" style="padding:2px;border:thin solid darkGrey;color:red;<?=(Zend_Registry::get('memcache')->get(Service::SERVICE_NOMINAL))?'display:none;':''?>"><?=__('Please contact your administrator, services needed for some features are not running. You may experience errors if you continue.')?></div>
+    <div id="systemsWarning" style="padding:2px;border:thin solid darkGrey;color:red;<?=(Zend_Registry::get('cache')->get(Service::SERVICE_NOMINAL))?'display:none;':''?>"><?=__('Please contact your administrator, services needed for some features are not running. You may experience errors if you continue.')?></div>
     <div id="loadingZone"></div>
     <form name="frmLogin" method="POST" onSubmit="return submitFormLogin();">
     <fieldset>

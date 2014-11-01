@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  MedicationsController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       MedicationsController.php
 *
@@ -371,8 +383,8 @@ class MedicationsController extends WebVista_Controller_Action {
 		$cacheKey = str_replace('-', '_', $cacheKey);
 		$cacheKey = str_replace('/', '_', $cacheKey);
 		if ($cache->test($cacheKey."_hash")) {
-			$hash = $cache->load($cacheKey."_hash");
-			$lastModified = $cache->load($cacheKey."_lastModified");
+            $hash = $cache->get($cacheKey."_hash");
+            $lastModified = $cache->get($cacheKey."_lastModified");
 			$headers = getallheaders();
 			if (isset($headers['If-None-Match']) && preg_match('/'.$hash.'/', $headers['If-None-Match'])) {
 				header("Last-Modified: " . $lastModified);
@@ -382,7 +394,7 @@ class MedicationsController extends WebVista_Controller_Action {
 		}
 
 		if ($cache->test($cacheKey)) {
-			$items = $cache->load($cacheKey);
+            $items = $cache->get($cacheKey);
 		}
 		else {
 			$items = $this->render('toolbar');
@@ -392,9 +404,9 @@ class MedicationsController extends WebVista_Controller_Action {
 			$objConfig->configId = 'enableCache';
 			$objConfig->populate();
 			if ($objConfig->value) {
-				$cache->save($hash, $cacheKey."_hash", array('tagToolbar'));
-				$cache->save($lastModified, $cacheKey."_lastModified", array('tagToolbar'));
-				$cache->save($items, $cacheKey, array('tagToolbar'));
+                $cache->set($cacheKey."_hash", $hash, true, array('tagToolbar'));
+                $cache->set($cacheKey."_lastModified", $lastModified, true, array('tagToolbar'));
+                $cache->set($cacheKey, $items, true, array('tagToolbar'));
 			}
 			header("ETag: ". $hash);
 			header("Last-Modified: ". $lastModified);

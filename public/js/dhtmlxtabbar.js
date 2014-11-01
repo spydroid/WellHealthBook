@@ -160,6 +160,9 @@ dhtmlXTabBar.prototype.setContent=function(id,nodeId){
 		if ((this._lastActive)&&(this._lastActive.idd==id)) { 
 			this._setContent(this._lastActive);
 		}
+        /* Start WellHealthBook Hack */
+        WHB_Util.fixScriptInnerHTML(nodeId);
+        /* End WellHealthBook Hack */
 };
 dhtmlXTabBar.prototype._setContent=function(tab,stelth){
 	if (this._hrfmode)

@@ -2345,10 +2345,17 @@ function dhtmlXWindows() {
 			win._content.childNodes[2].appendChild(obj);
 			win._content.childNodes[2].style.overflow = (append===true?"auto":"hidden");
 			obj.style.display = "";
+            /* Start WellHealthBook Hack */
+            WHB_Util.fixScriptInnerHTML(obj);
+            /* End WellHealthBook Hack */
 		} else if (type == "str") {
 			win._frame = null;
 			this._setInnerHTML(win._content.childNodes[2], obj);
 			//win._content.childNodes[2].innerHTML = obj;
+            /* Start WellHealthBook Hack */
+            win._content.childNodes[2].innerHTML = obj;
+            WHB_Util.fixScriptInnerHTML(win._content.childNodes[2]);
+            /* End WellHealthBook Hack */
 		}
 	}
     	this._setInnerHTML = function(node, innerHTML, type) {

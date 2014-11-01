@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  CacheFileController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       CacheFileController.php
 *
@@ -250,8 +262,8 @@ class CacheFileController extends WebVista_Controller_Action {
     protected function return304CacheHit($cacheKey) {
         $cache = Zend_Registry::get('cache');
         if ($cache->test($cacheKey."_hash")) {
-            $hash = $cache->load($cacheKey."_hash");
-            $lastModified = $cache->load($cacheKey."_lastModified");
+            $hash = $cache->get($cacheKey."_hash");
+            $lastModified = $cache->get($cacheKey."_lastModified");
             $headers = getallheaders();
             if (isset($headers['If-None-Match']) &&
                 preg_match('/'.$hash.'/', $headers['If-None-Match'])) {
@@ -268,8 +280,8 @@ class CacheFileController extends WebVista_Controller_Action {
         $cache = Zend_Registry::get('cache');
 
         if ($cache->test($cacheKey)) {
-            $output = $cache->load($cacheKey);
-            $searchExt = $cache->load($cacheKey."_ext");
+            $output = $cache->get($cacheKey);
+            $searchExt = $cache->get($cacheKey."_ext");
             return $output;
         }
         else {
@@ -292,10 +304,10 @@ class CacheFileController extends WebVista_Controller_Action {
 
             $hash = md5($output);
             $lastModified = gmdate("D, d M Y H:i:s")." GMT";
-            $cache->save($searchExt, $cacheKey."_ext");
-            $cache->save($hash, $cacheKey."_hash");
-            $cache->save($lastModified, $cacheKey."_lastModified");
-            $cache->save($output, $cacheKey);
+            $cache->set($cacheKey."_ext", $searchExt, true);
+            $cache->set($cacheKey."_hash", $hash, true);
+            $cache->set($cacheKey."_lastModified", $lastModified, true);
+            $cache->set($cacheKey, $output, true);
             header("ETag: ". $hash);
             header("Last-Modified: ". $lastModified);
             header("Content-length: "  . mb_strlen($output));

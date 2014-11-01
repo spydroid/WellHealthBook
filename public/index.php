@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  index.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       index.php
 *
@@ -32,7 +44,7 @@ class User {
         var $username;
 }
 */
-session_name('clearhealth');
+session_name('wellhealthbook');
 function calcTS() {
         list($usec, $sec) = explode(" ", microtime());
         $ts = ((float)$usec + (float)$sec);
@@ -60,6 +72,6 @@ function __($key) {
 }
 calcTS();
 define ('APPLICATION_ENVIRONMENT','production');
-require_once './application/library/WebVista/App.php';
+require_once '../application/library/WebVista/App.php';
 WebVista::getInstance()->run();
 

@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  ACLAPI.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       ACLAPI.php
 *
@@ -25,7 +37,7 @@
 /**
  * API for ACL
  *
- * ACL Items structure in memcache:
+ * ACL Items structure in cache:
  * array('module [default]'=>array('controller [IndexController]'=>array('read'=>array('permission [indexAction]','permission [listAction]'),
  *                                               'write'=>array('permission [addAction]','permission [editAction]')),
  *                         'controller [ErrorController]'=>array('read'=>array('permission [indexAction]','permission [listAction]'),
@@ -45,11 +57,11 @@ class ACLAPI {
 	 * @throw Exception
 	 */
 	public static function saveACLItems(Array $items) {
-		$memcache = Zend_Registry::get('memcache');
-		$aclItems = $memcache->get(self::$_aclItemsKey);
+        $cache = Zend_Registry::get('cache');
+        $aclItems = $cache->get(self::$_aclItemsKey);
 		if ($aclItems === false) {
 			// initialize an empty items
-			$memcache->set(self::$_aclItemsKey,array());
+            $cache->set(self::$_aclItemsKey, array());
 		}
 		foreach ($items as $moduleName=>$resourceList) {
 			self::addModule($moduleName);
@@ -73,8 +85,8 @@ class ACLAPI {
 	 * @throw Exception
 	 */
 	public static function addModule($module) {
-		$memcache = Zend_Registry::get('memcache');
-		$aclItems = $memcache->get(self::$_aclItemsKey);
+        $cache = Zend_Registry::get('cache');
+        $aclItems = $cache->get(self::$_aclItemsKey);
 		if ($aclItems === false) {
 			$msg = __('No defined ACL.');
 			throw new Exception($msg);
@@ -86,7 +98,7 @@ class ACLAPI {
 		}
 		$aclItems[$module] = array();
 		$ret = true;
-		$memcache->set(self::$_aclItemsKey,$aclItems);
+        $cache->set(self::$_aclItemsKey, $aclItems);
 		return $ret;
 	}
 
@@ -99,8 +111,8 @@ class ACLAPI {
 	 * @throw Exception
 	 */
 	public static function addResource($resource,$module='default') {
-		$memcache = Zend_Registry::get('memcache');
-		$aclItems = $memcache->get(self::$_aclItemsKey);
+        $cache = Zend_Registry::get('cache');
+        $aclItems = $cache->get(self::$_aclItemsKey);
 		if ($aclItems === false) {
 			$msg = __('No defined ACL.');
 			throw new Exception($msg);
@@ -121,7 +133,7 @@ class ACLAPI {
 			break;
 		}
 		if ($ret) {
-			$memcache->set(self::$_aclItemsKey,$aclItems);
+            $cache->set(self::$_aclItemsKey, $aclItems);
 		}
 		return $ret;
 	}
@@ -140,8 +152,8 @@ class ACLAPI {
 			$msg = __('Mode '.$mode.' does not supported.');
 			throw new Exception($msg);
 		}
-		$memcache = Zend_Registry::get('memcache');
-		$aclItems = $memcache->get(self::$_aclItemsKey);
+        $cache = Zend_Registry::get('cache');
+        $aclItems = $cache->get(self::$_aclItemsKey);
 		if ($aclItems === false) {
 			$msg = __('No defined ACL.');
 			throw new Exception($msg);
@@ -167,7 +179,7 @@ class ACLAPI {
 			}
 		}
 		if ($ret) {
-			$memcache->set(self::$_aclItemsKey,$aclItems);
+            $cache->set(self::$_aclItemsKey, $aclItems);
 		}
 		return $ret;
 	}
@@ -185,8 +197,8 @@ class ACLAPI {
 			$msg = __('Mode '.$mode.' does not supported.');
 			throw new Exception($msg);
 		}
-		$memcache = Zend_Registry::get('memcache');
-		$aclItems = $memcache->get(self::$_aclItemsKey);
+        $cache = Zend_Registry::get('cache');
+        $aclItems = $cache->get(self::$_aclItemsKey);
 		if ($aclItems === false) {
 			$msg = __('No defined ACL.');
 			throw new Exception($msg);

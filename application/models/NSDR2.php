@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  NSDR2.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       NSDR2.php
 *
@@ -28,8 +40,8 @@
 class NSDR2 extends NSDR {
 
 	public static function systemStart() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[1]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[1]);
 
 		// By default all NSDR methods will return an empty/false value
 		$methods = array(
@@ -64,7 +76,7 @@ class NSDR2 extends NSDR {
 					$value = $ORMClass; // override $value
 				}
 				trigger_error('NSDR: '.$key.' = '.$value);
-				$memcache->set($key,$value);
+                $cache->set($key, $value);
 			}
 			// user-defined NSDR methods
 			$nsdrMethods = $row->methods;
@@ -75,27 +87,27 @@ class NSDR2 extends NSDR {
 				$keySuffix = '['.$method->methodName.'()]';
 				$key = $row->namespace.$keySuffix;
 				trigger_error('NSDR Method: '.$key.' = '.$value);
-				$memcache->set($key,$value);
+                $cache->set($key, $value);
 			}
 		}
 
-		$memcache->set(self::$_statusKey,self::$_states[0]);
+        $cache->set(self::$_statusKey, self::$_states[0]);
 	}
 
 	public static function systemReload() {
 		$ret = false;
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[3]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[3]);
 		self::systemUnload();
 		self::systemStart();
 		$ret = true;
-		$memcache->set(self::$_statusKey,self::$_states[2]);
+        $cache->set(self::$_statusKey, self::$_states[2]);
 		return $ret;
 	}
 
 	public static function systemUnload() {
-		$memcache = Zend_Registry::get('memcache');
-		$memcache->set(self::$_statusKey,self::$_states[5]);
+        $cache = Zend_Registry::get('cache');
+        $cache->set(self::$_statusKey, self::$_states[5]);
 
 		// By default all NSDR methods will return an empty/false value
 		$methods = array(
@@ -114,11 +126,11 @@ class NSDR2 extends NSDR {
 			}
 		}
 
-		$memcache->set(self::$_statusKey,self::$_states[4]);
+        $cache->set(self::$_statusKey, self::$_states[4]);
 	}
 
 	/**
-	 * Execute memcache value specified by namespace
+     * Execute cache value specified by namespace
 	 *
 	 * @param NSDRBase $nsdrBase
 	 * @param mixed $context
@@ -129,9 +141,9 @@ class NSDR2 extends NSDR {
 	 */
 	/*protected static function _populateMethod(NSDRBase $nsdrBase,$context,$namespace,$data = null,$level = 0) {
 		// $namespace here is in the form of space.name[method()]
-		$memcache = Zend_Registry::get('memcache');
-		// retrieves logic code in memcache
-		$result = $memcache->get($namespace);
+        $cache = Zend_Registry::get('cache');
+        // retrieves logic code in cache
+        $result = $cache->get($namespace);
 		if ($result !== false) { // has cached entry
 			if (preg_match('/(.*)\[(.*)\(\)\]$/',$namespace,$matches)) {
 				$method = ucfirst($matches[2]);
@@ -177,7 +189,7 @@ class NSDR2 extends NSDR {
 			}
 		}
 		else {
-			$msg = __('Namespace does not exist in memcache').': '.$namespace;
+            $msg = __('Namespace does not exist in cache').': '.$namespace;
 		}
 		throw new Exception($msg);
 	}*/
@@ -220,7 +232,7 @@ class NSDR2 extends NSDR {
 			}
 			return $ret;
 		}
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$request = trim($request);
 		// $request is in the form of 1234::com.clearhealth.person[populate()]
 		// tokenize $request
@@ -315,7 +327,7 @@ class NSDR2 extends NSDR {
 	}
 
 	/**
-	 * Execute logic code defined in memcache specified by namespace
+     * Execute logic code defined in cache specified by namespace
 	 *
 	 * @param string $method Either populate or persist, default to populate if invalid method specified
 	 * @param NSDRBase $nsdrBase
@@ -332,9 +344,9 @@ class NSDR2 extends NSDR {
 		}
 		$defaultMethod = ucfirst($method);
 		// $namespace here is in the form of space.name[method()]
-		$memcache = Zend_Registry::get('memcache');
-		// retrieves logic code in memcache
-		$result = $memcache->get($namespace);
+        $cache = Zend_Registry::get('cache');
+        // retrieves logic code in cache
+        $result = $cache->get($namespace);
 		trigger_error($context.'::'.$namespace.' = '.$result);
 		if ($result !== false) { // has cached entry
 			if (preg_match('/(.*)\[(.*)\(\)\]$/',$namespace,$matches)) {
@@ -401,7 +413,7 @@ class NSDR2 extends NSDR {
 			}
 		}
 		else {
-			$msg = __('Namespace does not exist in memcache').': '.$namespace;
+            $msg = __('Namespace does not exist in cache').': '.$namespace;
 		}
 		trigger_error($msg,E_USER_NOTICE);
 		return $msg;
@@ -416,7 +428,7 @@ class NSDR2 extends NSDR {
 	 * @throw Exception
 	 */
 	public static function persist($request,$data) {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$request = trim($request);
 		// $request is in the form of 1234::com.clearhealth.person[populate()]
 		// tokenize $request
@@ -476,9 +488,9 @@ class NSDR2 extends NSDR {
 	}
 
 	public static function removeNamespace($key) {
-		$memcache = Zend_Registry::get('memcache');
-		trigger_error('Delete memcache key:'.$key,E_USER_NOTICE);
-		$ret = $memcache->delete($key,0);
+        $cache = Zend_Registry::get('cache');
+        trigger_error('Delete cache key:'.$key,E_USER_NOTICE);
+        $ret = $cache->delete($key, 0);
 		return $ret;
 	}
 

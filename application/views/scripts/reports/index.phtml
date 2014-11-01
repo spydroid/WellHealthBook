@@ -219,7 +219,7 @@ function reportsGetResults(baseId) {
 		url: "<?=$this->baseUrl?>/reports.raw/get-report",
 		handleAs: "json",
 		content: {
-			"baseId": baseId,
+			"baseId": baseId
 		},
 		load: function (data) {
 			dojo.byId("reportsViewsGridId").style.display = "";
@@ -240,7 +240,7 @@ function reportsGetResults(baseId) {
 							"id": "filter"+name.replace(/[^a-zA-Z\.]/,''),
 							"onChange": "reportsDateFilterOnChanged",
 							"style": "width:80px;",
-							"value": filter.defaultValue,
+							"value": filter.defaultValue
 						};
 						reportsResultsToolbar.addDatePicker(params,filter.id,ctr++,prettyName,"filter.png","filter.png");
 						break;

@@ -43,6 +43,9 @@ dhtmlXToolbarObject.prototype.addDatePicker = function(data,id,pos,text,imgEnabl
 	if (data.value) {
 		var x = data.value.split("-");
 		if (x.length == 3) {
+            x[1] += "";
+            if (x[1].substr(0, 1) == "0") x[1] = x[1].substr(1);
+            if (x[2].substr(0, 1) == "0") x[2] = x[2].substr(1);
 			var y = parseInt(x[0]);
 			var m = parseInt(x[1]) - 1;
 			var d = parseInt(x[2]);

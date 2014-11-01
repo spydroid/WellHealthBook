@@ -1,4 +1,16 @@
 <?php
+/******************************************************************************
+ *  PatientSelectController.php
+ *
+ *  @copyright: (c) 2014 WellHealthBook (http://www.wellhealthbook.com)
+ *  @author: SpyDroid (spydroid@me.com) 2014
+ *
+ *  @license: GNU GPL v3, you can find a copy of that license under LICENSE
+ *      file or by visiting: http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ *****************************************************************************/
+
+
 /*****************************************************************************
 *       PatientSelectController.php
 *
@@ -32,16 +44,13 @@ class PatientSelectController extends WebVista_Controller_Action
     }
 
 	public function indexAction() {
-		$memcache = Zend_Registry::get('memcache');
-		$defaultQuickList = $memcache->get('defaultQuickList');
+        $cache = Zend_Registry::get('cache');
+        $defaultQuickList = $cache->get('defaultQuickList');
 		if ($defaultQuickList === false) {
 			$defaultQuickList = array();
 			$defaultQuickList['type'] = 'mostRecent';
 			$defaultQuickList['id'] = 'mostRecent';
 			$defaultQuickList['text'] = 'Most Recent';
-		}
-		else {
-			$defaultQuickList = unserialize($defaultQuickList);
 		}
 		$this->view->defaultQuickList = $defaultQuickList;
 		$this->view->quickList = $this->_getQuickList();
@@ -60,7 +69,7 @@ class PatientSelectController extends WebVista_Controller_Action
 	}
 
 	public function processSetDefaultQuicklistAction() {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$type = $this->_getParam('type');
 		$id = $this->_getParam('id');
 		$text = $this->_getParam('text');
@@ -69,13 +78,10 @@ class PatientSelectController extends WebVista_Controller_Action
 		$defaultQuickList['type'] = $type;
 		$defaultQuickList['id'] = $id;
 		$defaultQuickList['text'] = $text;
-		$memcache->set('defaultQuickList',serialize($defaultQuickList));
+        $cache->set('defaultQuickList', $defaultQuickList);
 
-		$quickList = $memcache->get('quickList');
-		if ($quickList !== false) {
-			$quickList = unserialize($quickList);
-		}
-		else {
+        $quickList = $cache->get('quickList');
+        if ($quickList === false) {
 			$quickList = array();
 		}
 		$quickList[$type][$id] = $defaultQuickList;
@@ -141,13 +147,13 @@ class PatientSelectController extends WebVista_Controller_Action
 	}
 
 	protected function _getPatientByMostRecent() {
-		$memcache = Zend_Registry::get('memcache');
-		$mostRecentRaw = $memcache->get('mostRecent');
+        $cache = Zend_Registry::get('cache');
+        $mostRecentRaw = $cache->get('mostRecent');
 		if ($mostRecentRaw === false) {
 			$mostRecent = array();
 		}
 		else {
-			$mostRecent = unserialize($mostRecentRaw);
+			$mostRecent = $mostRecentRaw;
 		}
 		$currentUserId = (int)Zend_Auth::getInstance()->getIdentity()->personId;
 		if (!array_key_exists($currentUserId,$mostRecent)) {
@@ -212,11 +218,11 @@ class PatientSelectController extends WebVista_Controller_Action
 		}
 		//var_dump($matches);exit;
 		//$matches = array("name1" => $match, "name2" =>"value3");
-        	$this->_helper->autoCompleteDojo($matches);
+        $this->_helper->autoCompleteDojo($matches);
 	}
 
 	public function detailAction() {
-        	$personId = (int)$this->_getParam('personId');
+        $personId = (int)$this->_getParam('personId');
 		if (!$personId > 0) $this->_helper->autoCompleteDojo($personId);
 		$db = Zend_Registry::get('dbAdapter');
 		$patient = new Patient();
@@ -227,43 +233,43 @@ class PatientSelectController extends WebVista_Controller_Action
 		$outputArray['displayGender'] = $patient->displayGender;
 		$outputArray['age'] = $patient->age;
 		$acj = Zend_Controller_Action_HelperBroker::getStaticHelper('json');
-                $acj->suppressExit = true;
-                $acj->direct($outputArray);
+        $acj->suppressExit = true;
+        $acj->direct($outputArray);
 	}
 
 	public function getMostRecentVisitAction() {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$personId = (int)$this->_getParam('personId');
 
 		$mostRecentVisit = array();
-		$mostRecentVisitRaw = $memcache->get('mostRecentVisit');
+        $mostRecentVisitRaw = $cache->get('mostRecentVisit');
 		if ($mostRecentVisitRaw !== false) {
-			$mostRecentVisit = unserialize($mostRecentVisitRaw);
+			$mostRecentVisit = $mostRecentVisitRaw;
 		}
 		$recentVisit = 0;
 		if (isset($mostRecentVisit[$personId])) {
 			$recentVisit = $mostRecentVisit[$personId];
 		}
 		$json = Zend_Controller_Action_HelperBroker::getStaticHelper('json');
-                $json->suppressExit = true;
-                $json->direct($recentVisit);
+        $json->suppressExit = true;
+        $json->direct($recentVisit);
 	}
 
 	public function processMostRecentVisitAction() {
-		$memcache = Zend_Registry::get('memcache');
+        $cache = Zend_Registry::get('cache');
 		$visitId = (int)$this->_getParam('visitId');
 		$personId = (int)$this->_getParam('personId');
 
 		$mostRecentVisit = array();
-		$mostRecentVisitRaw = $memcache->get('mostRecentVisit');
+        $mostRecentVisitRaw = $cache->get('mostRecentVisit');
 		if ($mostRecentVisitRaw !== false) {
-			$mostRecentVisit = unserialize($mostRecentVisitRaw);
+			$mostRecentVisit = $mostRecentVisitRaw;
 		}
 		$mostRecentVisit[$personId] = $visitId;
-		$memcache->set('mostRecentVisit',serialize($mostRecentVisit));
+        $cache->set('mostRecentVisit', $mostRecentVisit);
 		$json = Zend_Controller_Action_HelperBroker::getStaticHelper('json');
-                $json->suppressExit = true;
-                $json->direct(true);
+        $json->suppressExit = true;
+        $json->direct(true);
 	}
 
 }
