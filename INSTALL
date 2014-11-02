@@ -21,10 +21,12 @@
         database username like root
     d. database.params.password
         database password for username in the preceding config.
-5. Open up your favorite browser, most recommended latest version of Firefox, and navigate to http://localhost or whatever your website domain
-6. Login using admin as username and admin as password
-7. Once login, head over to Admin tab, select Enumeration Manager, and click Regenerate toolbar button
-8. Refresh your browser and enjoy.
+5. Create a cache folder (e.g. /var/www/cache) and set its permission to 777
+6. Open up your favorite browser, most recommended latest version of Firefox, and navigate to http://localhost or whatever your website domain
+7. Login using admin as username and admin as password
+8. Once login, head over to Admin tab, select Enumeration Manager, and click Regenerate toolbar button
+9. Remove all the folders/files under cache folder (e.g. rm -rf /var/www/cache/*)
+10. Refresh your browser and enjoy.
 
 
 NOTE: Due to licensing issue, you have to build your medication database manually using the following 3 tables:
