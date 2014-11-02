@@ -51,7 +51,7 @@ class Zend_View_Helper_FormDateText extends Zend_View_Helper_FormElement {
 		$varName = str_replace(' ','',ucwords(str_replace('-',' ',$sanitized['id'])));
 
 		$dateValue = date('Y-m-d',strtotime($sanitized['value']));
-		if ($dateValue == '1969-12-31') {
+        if ($dateValue == '1969-12-31' || $dateValue == '1970-01-01') {
 			$dateValue = date('Y-m-d');
 		}
 		$x = explode('-',$dateValue);
