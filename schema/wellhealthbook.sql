@@ -314,6 +314,104 @@ CREATE TABLE `barcodeMacros` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `basemed24`
+--
+
+DROP TABLE IF EXISTS `basemed24`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `basemed24` (
+  `pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `fda_id` int(11) NOT NULL,
+  `fda_app_id` varchar(6) NOT NULL,
+  `fda_app_prodnum` varchar(3) NOT NULL,
+  `fda_drugname` varchar(88) NOT NULL,
+  `ndc` varchar(11) NOT NULL,
+  `full_ndc` varchar(14) NOT NULL,
+  `hipaa_ndc` varchar(11) NOT NULL,
+  `tradename` varchar(99) NOT NULL,
+  `generic` tinyint(4) NOT NULL,
+  `market_status` tinyint(4) NOT NULL,
+  `schedule` tinyint(4) NOT NULL,
+  `rxnorm_cuid` varchar(8) NOT NULL,
+  `rxnorm` varchar(255) NOT NULL,
+  `strength` varchar(100) NOT NULL,
+  `unit` varchar(10) NOT NULL,
+  `packsize` varchar(24) NOT NULL,
+  `packtype` varchar(23) NOT NULL,
+  `formulation` text NOT NULL,
+  `equivalents` text NOT NULL,
+  `dose` varchar(64) NOT NULL,
+  `route` varchar(24) NOT NULL,
+  `vaclass` varchar(255) NOT NULL,
+  `firm_name` varchar(64) NOT NULL,
+  `md5` char(32) NOT NULL,
+  PRIMARY KEY (`pkey`),
+  KEY `fda_app_id` (`fda_app_id`),
+  KEY `fda_app_prodnum` (`fda_app_prodnum`),
+  KEY `ndc` (`ndc`),
+  KEY `full_ndc` (`full_ndc`),
+  KEY `hipaa_ndc` (`hipaa_ndc`),
+  KEY `tradename` (`tradename`),
+  KEY `rxnorm` (`rxnorm`),
+  KEY `strength` (`strength`),
+  KEY `unit` (`unit`),
+  KEY `packsize` (`packsize`),
+  KEY `packtype` (`packtype`),
+  KEY `dose` (`dose`),
+  KEY `route` (`route`),
+  KEY `vaclass` (`vaclass`),
+  KEY `firm_name` (`firm_name`),
+  KEY `generic` (`generic`),
+  KEY `fda_drugname` (`fda_drugname`),
+  KEY `fda_id` (`fda_id`),
+  KEY `fda_app_id_2` (`fda_app_id`),
+  KEY `fda_app_prodnum_2` (`fda_app_prodnum`),
+  KEY `fda_drugname_2` (`fda_drugname`),
+  KEY `ndc_2` (`ndc`),
+  KEY `hipaa_ndc_2` (`hipaa_ndc`),
+  KEY `rxnorm_2` (`rxnorm`),
+  KEY `strength_2` (`strength`),
+  KEY `unit_2` (`unit`),
+  KEY `packsize_2` (`packsize`),
+  KEY `packtype_2` (`packtype`),
+  KEY `dose_2` (`dose`),
+  KEY `route_2` (`route`),
+  KEY `vaclass_2` (`vaclass`),
+  KEY `firm_name_2` (`firm_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `basemed24interactions`
+--
+
+DROP TABLE IF EXISTS `basemed24interactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `basemed24interactions` (
+  `md5` char(32) NOT NULL,
+  `interact_md5` char(32) NOT NULL,
+  `notice` varchar(100) NOT NULL,
+  PRIMARY KEY (`md5`,`interact_md5`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `basemed24labels`
+--
+
+DROP TABLE IF EXISTS `basemed24labels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `basemed24labels` (
+  `pkey` int(11) NOT NULL,
+  `labelfile` varchar(255) NOT NULL,
+  PRIMARY KEY (`pkey`,`labelfile`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `building_address`
 --
 
@@ -2028,27 +2126,6 @@ CREATE TABLE `medications` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `menu`
---
-
-DROP TABLE IF EXISTS `menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `menu` (
-  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `site_section` varchar(50) NOT NULL DEFAULT 'default',
-  `parent` int(11) NOT NULL DEFAULT '0',
-  `dynamic_key` varchar(50) NOT NULL DEFAULT '',
-  `section` enum('children','more','dynamic') NOT NULL DEFAULT 'children',
-  `display_order` int(11) NOT NULL DEFAULT '0',
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `action` varchar(255) NOT NULL DEFAULT '',
-  `prefix` varchar(100) NOT NULL DEFAULT 'main',
-  PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=228988 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `messaging`
 --
 
@@ -3083,7 +3160,7 @@ DROP TABLE IF EXISTS `record_sequence`;
 CREATE TABLE `record_sequence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

@@ -237,8 +237,8 @@ class Patient extends WebVista_Model_ORM {
 			$ret[] = 'Address state field must be supplied and not more than 2 characters';
 		}
 		$zipCodeLen = strlen($address->zipCode);
-		if ($zipCodeLen != 5 && $zipCodeLen != 9) {
-			$ret[] = 'Address zipcode must be supplied and must be 5 or 9 digit long';
+        if ($zipCodeLen != 4 && $zipCodeLen != 5 && $zipCodeLen != 9) {
+            $ret[] = 'Address zipcode must be supplied and must be 4, 5 or 9 digit long';
 		}
 
 		$phoneNumber = new PhoneNumber();

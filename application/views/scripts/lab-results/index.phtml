@@ -245,7 +245,7 @@ function redrawLabTestsView(view) {
 		url: "<?=$this->baseUrl?>/lab-results.raw/"+view,
 		handleAs: "text",
 		load: function(data, ioArgs) {
-			dojo.setInnerHTML(dojo.byId('labTestsView'),data);
+            WHB_Util.setInnerHTMLDojo(dojo.byId('labTestsView'), data);
 			return data;
 		},
 		error: function(response, ioArgs) {

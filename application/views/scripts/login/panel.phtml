@@ -69,9 +69,8 @@ document.getElementById("mainLayoutContainerId").style.display = "none";
     <form name="frmLogin" method="POST" onSubmit="return submitFormLogin();">
     <fieldset>
     <legend><?=__("Authenticate")?></legend>
-	<div style="border: thin solid darkGrey;vertical-align:top;">
-	<p style="padding:4px;vertical-align:top;">Welcome to ClearHealth</p>
-	</div>
+	<h1>Welcome to WellHealthBook</h1>
+	<br/>
 	<div class="formRow">
 	<label>Username</label>
     <input name="username" type="text" size="30" value="<?php echo $this->escape($this->username) ?>" />

@@ -335,7 +335,7 @@ dhtmlxEvent(cnGrid.entBox,"contextmenu",function(e){
 			handleAs: "text",
 			load: function (data) {
 				transcriptionNotesFormSubmit = null; // just unset the transcriptionNotesFormSubmit() function
-				dojo.setInnerHTML(dojo.byId("templatePaneId"),data);
+                WHB_Util.setInnerHTMLDojo(dojo.byId("templatePaneId"), data);
 				cnvToolbar.showItem("print");
 				cnvToolbar.hideItem("save");
 				cnvToolbar.setItemText("noteSigningInfo","");
@@ -482,7 +482,7 @@ function cnvClearRightPane() {
 	cnvToolbar.hideItem("save");
 	cnvToolbar.setItemText("noteSigningInfo","");
 	transcriptionNotesFormSubmit = null; // just unset the transcriptionNotesFormSubmit() function
-	dojo.setInnerHTML(dojo.byId("templatePaneId"),"");
+    WHB_Util.setInnerHTMLDojo(dojo.byId("templatePaneId"), "");
 }
 
 resizedRightLayout(null,null);

@@ -20,7 +20,7 @@ function visitTypeGetContent(action) {
             "visitId": mainController.getActiveVisit()
 		},
 		load: function (data) {
-			dojo.setInnerHTML(dojo.byId("visitTypeContentId"),data);
+            WHB_Util.setInnerHTMLDojo(dojo.byId("visitTypeContentId"), data);
 		},
 		error: function (error) {
 			alert(error);

@@ -37,15 +37,15 @@ class BaseMed24Iterator extends WebVista_Model_ORMIterator implements Iterator {
 		$config = Zend_Registry::get('config');
 		$dbname = $config->database->params->dbname;
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24')
-			->joinLeft('chmed.basemed24labels', 'basemed24labels.pkey = basemed24.pkey',null)
-                        ->columns(array(
-					"basemed24.pkey as id",
-					"if(chmed.basemed24labels.pkey IS NOT NULL, 1, 0) as hasLabel", 
-					"if (formulary.fullNDC != '',concat('*',basemed24.ndc),basemed24.ndc) as ndc",
-					"if (formulary.fullNDC != '',1,0) as inFormulary"
-				))
-			->order("inFormulary DESC","chmed.basemed24.tradename DESC")
+            ->from('basemed24')
+            ->joinLeft('basemed24labels', 'basemed24labels.pkey = basemed24.pkey',null)
+            ->columns(array(
+                "basemed24.pkey AS id",
+                "IF (basemed24labels.pkey IS NOT NULL, 1, 0) AS hasLabel",
+                "IF (formulary.fullNDC != '', CONCAT('*', basemed24.ndc), basemed24.ndc) AS ndc",
+                "IF (formulary.fullNDC != '', 1, 0) AS inFormulary"
+            ))
+            ->order("inFormulary DESC","basemed24.tradename DESC")
 			->group("basemed24.pkey");
 			foreach($filters as $filter => $value) {
 				switch ($filter) {

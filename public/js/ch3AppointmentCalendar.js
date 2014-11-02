@@ -76,14 +76,19 @@ function appointmentCalendarClass(grid,timeGrid) {
 	this.openAppointmentAccordion = function(divId,cellId,url) {
 		var newDiv = document.createElement("div");
 		newDiv.setAttribute("id",divId);
+        /* Start WellHealthBook Hack */
         // dojo.setInnerHTML(newDiv,"<img src=\""+globalBaseUrl+"/img/loading.gif\" alt=\"Loading...\" style=\"margin:10px;\" />");
         WHB_Util.setInnerHTMLDojo(newDiv, "<img src=\""+globalBaseUrl+"/img/loading.gif\" alt=\"Loading...\" style=\"margin:10px;\" />");
+        /* End WellHealthBook Hack */
 		this.appAccordion.cells(cellId).attachObject(newDiv);
 		dojo.xhrGet({
 			url: url,
 			handleAs: "text",
 			load: function(data,ioArgs) {
-				dojo.setInnerHTML(newDiv,data);
+                /* Start WellHealthBook Hack */
+				//dojo.setInnerHTML(newDiv,data);
+				WHB_Util.setInnerHTMLDojo(newDiv,data);
+                /* End WellHealthBook Hack */
 				self.appAccordion.cells(cellId).attachObject(newDiv);
 				return data;
 			},

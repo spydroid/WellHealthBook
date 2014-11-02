@@ -158,7 +158,7 @@ function postSubmitcnTemplate() {
 	// reload all template items
 	cnmTemplateGrid.clearAll();
 	cnmTemplateGrid.load('<?=$this->baseUrl?>/clinical-notes-manager.raw/templates.json',"json");
-	dojo.setInnerHTML(dojo.byId('cnmDefinition'),'');
+    WHB_Util.setInnerHTMLDojo(dojo.byId('cnmDefinition'), '');
 	alert('<?=__('Data saved.')?>');
 	return false;
 }

@@ -139,7 +139,7 @@ class ChmedController extends WebVista_Controller_Action {
 
 	public function lookupDrugName($tradename,$limit) {
                 $sql = "select bm24.pkey as id, bm24.*
-                from chmed.basemed24 bm24
+                    FROM basemed24 bm24
                 where (fda_drugname like " . DB::quote($tradename) . ") group by fda_drugname order by fda_drugname desc limit " . $limit;
                 $res = DB::query($sql);
                 return $res;
@@ -147,7 +147,7 @@ class ChmedController extends WebVista_Controller_Action {
 	
 	public function lookupAllergy($tradename,$limit) {
                 $sql = "select 0 as id, name
-                from chmed.allergies
+                    FROM allergies
                 where name like " . DB::quote($tradename) . " order by name desc limit " . $limit;
                 $res = DB::query($sql);
                 return $res;
@@ -242,7 +242,7 @@ class ChmedController extends WebVista_Controller_Action {
 	}
 
 	public function lookupMedLabel($pkey) {
-                $sql = "select * from chmed.basemed24labels where pkey = " . (int)$pkey;
+        $sql = "select * FROM basemed24labels where pkey = " . (int)$pkey;
 		$db = Zend_Registry::get('dbAdapter'); 
                 $res = $db->query($sql);
                 //print_r($res->fetchAll(PDO::FETCH_ASSOC));

@@ -177,7 +177,7 @@ function reloadRightPane(id) {
 		url: "<?=$this->baseUrl?>/formulary-manager.raw/edit?id=" + id,
 		handleAs: "text",
 		load: function (data) {
-			dojo.setInnerHTML(dojo.byId("fmRightPane"),data);
+            WHB_Util.setInnerHTMLDojo(dojo.byId("fmRightPane"), data);
 		},
 		error: function (error) {
 			console.error ('Error: ', error);
@@ -224,7 +224,7 @@ function fmListGridOnEditCell(stage,rowId,cellIndex,newValue,oldValue) {
 					},
 					load: function (data) {
 						reloadListGrid();
-						dojo.setInnerHTML(dojo.byId("fmRightPane"),"");
+                        WHB_Util.setInnerHTMLDojo(dojo.byId("fmRightPane"), "");
 					},
 					error: function (error) {
 						alert(error);

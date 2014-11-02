@@ -36,9 +36,9 @@ class BaseMed24DetailIterator extends WebVista_Model_ORMIterator implements Iter
 		$db = Zend_Registry::get('dbAdapter');
 		$dbName = Zend_Registry::get('config')->database->params->dbname;
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24')
-			->joinLeft('chmed.basemed24labels', 'basemed24labels.pkey = basemed24.pkey',null)
-			->columns(array("basemed24.pkey as id","if(chmed.basemed24labels.pkey IS NOT NULL OR formulary.labelId > 0 OR LENGTH(formulary.externalUrl) > 0, 1, 0) as hasLabel","if(formulary.qty > 0, CONCAT(CAST(formulary.qty AS CHAR),' ',chmed.basemed24.dose), CONCAT('1 ',chmed.basemed24.dose)) AS dose"));
+            ->from('basemed24')
+            ->joinLeft('basemed24labels', 'basemed24labels.pkey = basemed24.pkey',null)
+            ->columns(array("basemed24.pkey AS id","if(basemed24labels.pkey IS NOT NULL OR formulary.labelId > 0 OR LENGTH(formulary.externalUrl) > 0, 1, 0) AS hasLabel","if(formulary.qty > 0, CONCAT(CAST(formulary.qty AS CHAR), ' ', basemed24.dose), CONCAT('1 ', basemed24.dose)) AS dose"));
 		foreach ($filters as $filter => $value) {
 			switch ($filter) {
 				case 'pkey':

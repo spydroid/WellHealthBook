@@ -128,7 +128,7 @@ function redrawNSDR(event,id,parentId) {
 				nsdrDataPointsTree.loadXML("<?=$this->baseUrl?>/nsdr-manager.raw/data-points.xml?id="+parentId);
 				data = "";
 			}
-			dojo.setInnerHTML(dojo.byId('nsdrDefinition'),data);
+            WHB_Util.setInnerHTMLDojo(dojo.byId('nsdrDefinition'), data);
 		},
 		error: function(response, ioArgs) {
 			console.error("HTTP status code: ", ioArgs.xhr.status);

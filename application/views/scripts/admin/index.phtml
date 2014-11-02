@@ -151,7 +151,7 @@ function changeAdminContainer(itemName,url) {
 		url: url,
 		handleAs: "text",
 		load: function(data,ioArgs) {
-			dojo.setInnerHTML(oContainer,data);
+            WHB_Util.setInnerHTMLDojo(oContainer, data);
 			adminLayout.cells("b").attachObject(oContainer);
 			adminLayout.cells("b").setText(itemName);
 			return data;

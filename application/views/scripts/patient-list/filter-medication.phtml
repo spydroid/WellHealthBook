@@ -11,9 +11,6 @@
 	</div>
 </div>
 <script>
-var chBaseMed24Url = "<?=$this->chBaseMed24Url?>";
-var chBaseMed24DetailUrl = "<?=$this->chBaseMed24DetailUrl?>";
-
 var filterMedicationGrid = new dhtmlXGridObject("filterMedicationGridId");
 filterMedicationGrid.enableMultiselect(true);
 filterMedicationGrid.setImagePath("<?=$this->baseUrl?>/img/");
@@ -62,7 +59,7 @@ if (fscb != undefined) {
 	fscb.destroyRecursive();
 	fscb = null;
 }
-var fsac = new custom.MedicationSelectAutoComplete({url:"<?=$this->chBaseMed24Url?>",requestMethod:"post",doClientPaging:true},"filterMedicationSelectAutoComplete");
+var fsac = new custom.MedicationSelectAutoComplete({url:"<?=$this->baseUrl?>/chmed.raw/ajax-basemed-24",requestMethod:"post",doClientPaging:true},"filterMedicationSelectAutoComplete");
 var fscb = new custom.MedicationSelectComboBox({name:"medication[tradename]",value:"",autocomplete:false,store:fsac,hasDownArrow:false},"filterMedicationSelectAutoCompleteDiv");
 // change combobox width
 fscb.domNode.style.width = "300px";

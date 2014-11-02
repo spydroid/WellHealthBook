@@ -180,8 +180,6 @@ class MedicationsController extends WebVista_Controller_Action {
 		$this->view->scheduleOptions = $scheduleOptions;
 		$this->view->adminSchedules = $adminSchedules;
 
-		$this->view->chBaseMed24Url = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24Url;
-		$this->view->chBaseMed24DetailUrl = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24DetailUrl;
 		$this->_form = new WebVista_Form(array('name' => 'new-medication'));
 		$this->_form->setAction(Zend_Registry::get('baseUrl') . "medications.raw/process-add-medication");
 
@@ -803,8 +801,6 @@ EOL;
 		$this->view->scheduleOptions = $scheduleOptions;
 		$this->view->adminSchedules = $adminSchedules;
 
-		$this->view->chBaseMed24Url = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24Url;
-		$this->view->chBaseMed24DetailUrl = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24DetailUrl;
 		$this->_form = new WebVista_Form(array('name' => 'new-medication'));
 		$this->_form->setAction(Zend_Registry::get('baseUrl') . "medications.raw/process-add-medication");
 

@@ -159,8 +159,8 @@ function resultsOnMenuClicked(itemId,type) {
 }
 
 function clearChart() {
-	dojo.setInnerHTML(dojo.byId('graphLegend'),'');
-	dojo.setInnerHTML(dojo.byId('graphChart'),'');
+    WHB_Util.setInnerHTMLDojo(dojo.byId('graphLegend'), '');
+    WHB_Util.setInnerHTMLDojo(dojo.byId('graphChart'), '');
 	chartData = {};
 }
 
@@ -425,7 +425,7 @@ function addSelectedResultsToChart() {
 	yMax = yValMax;
 
 	var oGraphChart = dojo.byId("graphChart");
-	dojo.setInnerHTML(oGraphChart,"");
+    WHB_Util.setInnerHTMLDojo(oGraphChart, "");
 	var chart = new dojox.charting.Chart2D("graphChart");
 	chart.addAxis("x",{labels:xLabels,majorTickStep:xMajorTickStep,minorTickStep:xMinorTickStep,microTickStep:xMicroTickStep});
 	chart.addAxis("y", {vertical:true,labels:yLabels,majorTickStep:yMajorTickStep,minorTickStep:yMinorTickStep,microTickStep:yMicroTickStep});
@@ -501,7 +501,7 @@ function addSelectedResultsToChart() {
 		}
 	}
 
-	dojo.setInnerHTML(oGraphLegend,graphLegend);
+    WHB_Util.setInnerHTMLDojo(oGraphLegend, graphLegend);
 	chart.render();
 }
 

@@ -62,6 +62,7 @@ function openFormularyEditWindow(formularyId,data) {
 }
 
 function addSelectedFormulary() {
+    alert('No selected formulary');
 	if (!currentFormularyData) return;
 	//openFormularyEditWindow(null,currentFormularyData);
 	var packsize = currentFormularyData.packsize.split(";");
@@ -103,7 +104,7 @@ if (fscb != undefined) {
 	fscb.destroyRecursive();
 	fscb = null;
 }
-var fsac = new custom.MedicationSelectAutoComplete({url:'<?=$this->chBaseMed24Url?>',requestMethod:"post",doClientPaging:true},'formularySelectAutoComplete');
+var fsac = new custom.MedicationSelectAutoComplete({url:'<?=$this->baseUrl?>/chmed.raw/ajax-basemed-24',requestMethod:"post",doClientPaging:true},'formularySelectAutoComplete');
 var fscb = new custom.MedicationSelectComboBox({name:"formulary[tradename]",value:'',autocomplete:false,store:fsac,hasDownArrow:false},"formularySelectAutoCompleteDiv");
 // change combobox width
 fscb.domNode.style.width = "470px";
@@ -116,7 +117,7 @@ function getFormularyCHMedDetails(arg) {
 	var tradename = arg;
 	var pkey = fscb.selectedKey;
 	dojo.xhrPost({
-		url: '<?=$this->chBaseMed24DetailUrl?>',
+        url: '<?=$this->baseUrl?>/chmed.raw/ajax-basemed-24-detail',
 		content: {
             '': pkey
 		},

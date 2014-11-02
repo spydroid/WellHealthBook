@@ -682,13 +682,13 @@ function openAdvancedFiltersWindow() {
 function openAccordion(divId,accordion,cellId,url) {
 	var newDiv = document.createElement("div");
 	newDiv.setAttribute("id",divId);
-	dojo.setInnerHTML(newDiv,"<img src=\"<?=$this->baseUrl?>/img/loading.gif\" alt=\"Loading...\" style=\"margin:10px;\" />");
+    WHB_Util.setInnerHTMLDojo(newDiv, "<img src=\"<?=$this->baseUrl?>/img/loading.gif\" alt=\"Loading...\" style=\"margin:10px;\" />");
 	accordion.cells(cellId).attachObject(newDiv);
 	dojo.xhrGet({
 		url: url,
 		handleAs: "text",
 		load: function(data,ioArgs) {
-			dojo.setInnerHTML(newDiv,data);
+            WHB_Util.setInnerHTMLDojo(newDiv, data);
 			accordion.cells(cellId).attachObject(newDiv);
 			return data;
 		},

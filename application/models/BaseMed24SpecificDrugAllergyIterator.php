@@ -37,7 +37,7 @@ class BaseMed24SpecificDrugAllergyIterator extends WebVista_Model_ORMIterator im
 		$value = $filters;
 		if (strlen($value) > 1) $value .= '%';
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24',null)
+            ->from('basemed24',null)
 			->distinct('vaclass')
 			->columns(array(
 				'basemed24.vaclass',

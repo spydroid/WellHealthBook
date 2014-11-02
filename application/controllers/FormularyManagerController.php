@@ -78,8 +78,6 @@ class FormularyManagerController extends WebVista_Controller_Action {
 		$prettyName = preg_replace('/([A-Z]{1})/',' \1',substr($tableName,9));
 		$this->view->tableName = $tableName;
 		$this->view->prettyName = $prettyName;
-		$this->view->chBaseMed24Url = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24Url;
-		$this->view->chBaseMed24DetailUrl = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24DetailUrl;
 
 		$name = Medication::ENUM_ADMIN_SCHED;
 		$enumeration = new Enumeration();

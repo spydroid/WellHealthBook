@@ -81,7 +81,7 @@ class BaseMed24 extends WebVista_Model_ORM {
 		}
 		$db = Zend_Registry::get('dbAdapter');
 		$dbSelect = $db->select()
-			->from('chmed.basemed24')
+            ->from('basemed24')
 			->where('hipaa_ndc = ?',$hipaaNDC);
 		$this->populateWithSql($dbSelect->__toString());
 	}
@@ -90,7 +90,7 @@ class BaseMed24 extends WebVista_Model_ORM {
 		$drugDescription .= '';
 		$db = Zend_Registry::get('dbAdapter');
 		$dbSelect = $db->select()
-			->from('chmed.basemed24')
+            ->from('basemed24')
 			->where('concat(tradename,\' \',unit) = ?',$hipaaNDC);
 		$this->populateWithSql($dbSelect->__toString());
 	}

@@ -1,6 +1,4 @@
 <script>
-var chBaseMed24Url = '<?=$this->chBaseMed24Url?>';
-var chBaseMed24DetailUrl = '<?=$this->chBaseMed24DetailUrl?>';
 var medQty = 0;
 
 var currentMedData = null;
@@ -161,7 +159,7 @@ function medicationPopulateDetails(pkey,medPopulate) {
 		medPopulate = true;
 	}
 	dojo.xhrPost ({
-		url: chBaseMed24DetailUrl,
+        url: "<?=$this->baseUrl?>/chmed.raw/ajax-basemed-24-detail",
 		content: {
 			'': pkey
 		},
@@ -261,7 +259,7 @@ if (mscb != undefined) {
 	mscb.destroyRecursive();
 	mscb = null;
 }
-var msac = new custom.MedicationSelectAutoComplete({url:chBaseMed24Url,requestMethod:"post",doClientPaging:true},'medicationSelectAutoComplete');
+var msac = new custom.MedicationSelectAutoComplete({url:"<?=$this->baseUrl?>/chmed.raw/ajax-basemed-24",requestMethod:"post",doClientPaging:true},'medicationSelectAutoComplete');
 //var msac = new custom.MedicationSelectAutoComplete({url:'<?=$this->baseUrl?>/medications.raw/auto-complete',requestMethod:"post"},'medicationSelectAutoComplete');
 var mscb = new custom.MedicationSelectComboBox({name:"medication[tradename]",value:'<?=(isset($this->medication))?$this->medication->description:''?>',autocomplete:false,store:msac,hasDownArrow:false},"medicationSelectAutoCompleteDiv");
 // change combobox width

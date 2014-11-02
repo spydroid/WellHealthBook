@@ -154,7 +154,7 @@ function vitalSignsSetFilterGraph(filterGraph,doc) {
 			}
 			filterData[filterIndex] = {"color":color,"filter":filter,"data":[]};
 		}
-		dojo.setInnerHTML(doc.getElementById("vitalSignsLegendLabelId"),legend);
+        WHB_Util.setInnerHTMLDojo(doc.getElementById("vitalSignsLegendLabelId"), legend);
 
 		vitalSignsGenerateGraph(filterData,doc);
 	}
@@ -205,7 +205,7 @@ function vitalSignsGenerateGraph(filtersData,doc) {
 	if (!doc) {
 		doc = document;
 	}
-	dojo.setInnerHTML(doc.getElementById("graphChartId"),"");
+    WHB_Util.setInnerHTMLDojo(doc.getElementById("graphChartId"), "");
 	var numCols = vitalSignsLabelGrid.getColumnsNum();
 	if (typeof filtersData != "object" || !(numCols > 1)) {
 		return;

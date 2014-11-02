@@ -39,7 +39,7 @@ class BaseMed24DrugAllergyIterator extends WebVista_Model_ORMIterator implements
 		$formulary = $filters['formulary'];
 		if (strlen($value) > 1) $value  = $value . "%";
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24',null)
+            ->from('basemed24', null)
 			->distinct('vaclass')
 			->join($dbName.'.drugCodeClass AS drugCodeClass', 'drugCodeClass.code = basemed24.vaclass',null)
 			->columns(array(

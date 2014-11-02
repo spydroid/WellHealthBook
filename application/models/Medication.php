@@ -204,7 +204,7 @@ class Medication extends WebVista_Model_ORM implements Document {
 		$db = Zend_Registry::get('dbAdapter');
 		$pkey = $this->pkey;
 		$sqlSelect = $db->select()
-				->from('chmed.basemed24','schedule')
+                ->from('basemed24','schedule')
 				->where('pkey = ?',(string)$pkey);
 		$ret = 0;
 		$schedules = array('','I','II','III','IV','V');
@@ -218,7 +218,7 @@ class Medication extends WebVista_Model_ORM implements Document {
 		$db = Zend_Registry::get('dbAdapter');
 		$pkey = $this->pkey;
 		$sqlSelect = $db->select()
-				->from('chmed.basemed24','schedule')
+                ->from('basemed24','schedule')
 				->where('pkey = ?',(string)$pkey);
 		$ret = false;
 		$row = $db->fetchRow($sqlSelect);
@@ -232,7 +232,7 @@ class Medication extends WebVista_Model_ORM implements Document {
 		$db = Zend_Registry::get('dbAdapter');
 		$pkey = $this->pkey;
 		$sqlSelect = $db->select()
-				->from('chmed.basemed24','tradename')
+                ->from('basemed24','tradename')
 				->where('pkey = ?',(string)$pkey);
 		$ret = false;
 		$row = $db->fetchRow($sqlSelect);
@@ -438,7 +438,7 @@ class Medication extends WebVista_Model_ORM implements Document {
 	public function getChmedDose() {
 		$db = Zend_Registry::get('dbAdapter');
 		$sqlSelect = $db->select()
-			->from('chmed.basemed24','dose')
+            ->from('basemed24','dose')
 			->where('pkey = ?',$this->pkey);
 		$ret = '';
 		if ($row = $db->fetchRow($sqlSelect)) {
@@ -542,8 +542,8 @@ class Medication extends WebVista_Model_ORM implements Document {
 		if (isset($baseMed24List[$this->pkey])) return $baseMed24List[$this->pkey];
 		$db = Zend_Registry::get('dbAdapter');
 		$sqlSelect = $db->select()
-				->from('chmed.basemed24')
-				->where('chmed.basemed24.pkey = ?',$this->pkey)
+                ->from('basemed24')
+                ->where('basemed24.pkey = ?',$this->pkey)
 				->limit(1);
 		$baseMed24 = new BaseMed24();
 		if ($row = $db->fetchRow($sqlSelect)) {

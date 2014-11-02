@@ -93,7 +93,7 @@ class PatientAllergy extends WebVista_Model_ORM {
 		$db = Zend_Registry::get('dbAdapter');
 		$sqlSelect = $db->select()
 				->from('patientAllergies',array('symptoms','reactionType','active','causativeAgent','dateTimeReaction'))
-				->joinLeft('chmed.basemed24','chmed.basemed24.md5 = patientAllergies.drugAllergy',array('rxnorm_cuid'))
+                ->joinLeft('basemed24','basemed24.md5 = patientAllergies.drugAllergy',array('rxnorm_cuid'))
 				->where('patientAllergies.active = 1')
 				->where('patientAllergies.noKnownAllergies = 0')
 				->group('patientAllergies.patientAllergyId');

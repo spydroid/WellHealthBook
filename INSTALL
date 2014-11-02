@@ -26,3 +26,9 @@
 7. Once login, head over to Admin tab, select Enumeration Manager, and click Regenerate toolbar button
 8. Refresh your browser and enjoy.
 
+
+NOTE: Due to licensing issue, you have to build your medication database manually using the following 3 tables:
+    a. basemed24
+    b. basemed24labels
+    c. basemed24interactions
+

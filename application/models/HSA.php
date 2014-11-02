@@ -360,7 +360,7 @@ class HSA {
 		else if (preg_match('/lipitor/i',$s)) {
 			$message = 'Patient may benefit from hypercholesteremia drug such as Lipitor';
 			$sqlSelect = $db->select()
-					->from('chmed.basemed24',array('md5','vaclass'))
+                    ->from('basemed24',array('md5','vaclass'))
 					->where('pkey = ?',$medication->pkey);
 			$hasAllergy = false;
 			if ($row = $db->fetchRow($sqlSelect)) {

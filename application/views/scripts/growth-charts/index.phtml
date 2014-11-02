@@ -106,7 +106,7 @@ function chartTypeOnChanged(value) {
 
 var growthChart = null;
 function growthChartsPlot(chartType) {
-	dojo.setInnerHTML(dojo.byId("growthChartId"),"");
+    WHB_Util.setInnerHTMLDojo(dojo.byId("growthChartId"), "");
 	if (!listCharts[chartType]) return;
 	var chartData = listCharts[chartType];
 

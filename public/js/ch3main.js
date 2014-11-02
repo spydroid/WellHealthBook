@@ -148,8 +148,8 @@ mainFileLoaderClass.prototype.onLoadingCompleted = function() {
 			url: globalBaseUrl+"/"+action,
 			handleAs: "text",
 			load: function(data, ioArgs) {
-				dojo.setInnerHTML(dojo.byId('mainContentLayout'),data);
                 /* Start WellHealthBook Hack */
+				//dojo.setInnerHTML(dojo.byId('mainContentLayout'),data);
                 WHB_Util.setInnerHTMLDojo(dojo.byId('mainContentLayout'), data);
                 /* End WellHealthBook Hack */
 				return data;
@@ -1192,7 +1192,10 @@ visitSelectorClass.prototype.attachContent = function(id,url,callback) {
 		url: url,
 		handleAs: "text",
 		load: function(data,ioArgs) {
-			dojo.setInnerHTML(newDiv,data);
+            /* Start WellHealthBook Hack */
+			//dojo.setInnerHTML(newDiv,data);
+			WHB_Util.setInnerHTMLDojo(newDiv, data);
+            /* End WellHealthBook Hack */
 			if (typeof callback == "function") {
 				callback(newDiv);
 			}

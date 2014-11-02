@@ -36,7 +36,7 @@ class BaseMed24ClassIterator extends WebVista_Model_ORMIterator implements Itera
 		$db = Zend_Registry::get('dbAdapter');
 		$dbName = Zend_Registry::get('config')->database->params->dbname;
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24',null)
+            ->from('basemed24', null)
 			->distinct('vaclass')
                         ->columns(array(
 					"basemed24.vaclass",

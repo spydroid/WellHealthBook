@@ -36,8 +36,8 @@ class BaseMed24InteractionIterator extends WebVista_Model_ORMIterator implements
 		$db = Zend_Registry::get('dbAdapter');
 		$dbName = Zend_Registry::get('config')->database->params->dbname;
 		$dbSelect = $db->select(null)
-			->from('chmed.basemed24')
-			->join('chmed.basemed24interactions', 'basemed24interactions.md5 = basemed24.md5')
+            ->from('basemed24')
+            ->join('basemed24interactions', 'basemed24interactions.md5 = basemed24.md5')
 			->order("basemed24interactions.notice ASC")
 			->order("basemed24.tradename ASC")
 			->group("basemed24.md5");

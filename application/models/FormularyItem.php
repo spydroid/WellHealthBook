@@ -424,7 +424,7 @@ trigger_error($sql,E_USER_NOTICE);
 			$db = Zend_Registry::get('dbAdapter');
                 	$dbSelect = $db->select()
 				->from(array('f'=>$this->_table))
-				->join(array('hbm24'=>'chmed.basemed24'),'hbm24.full_ndc = f.fullNDC');
+                ->join(array('hbm24'=>'basemed24'),'hbm24.full_ndc = f.fullNDC');
 		}
 		return new WebVista_Model_ORMIterator($this,$dbSelect);
 	}
@@ -437,9 +437,9 @@ trigger_error($sql,E_USER_NOTICE);
 	public function getAllRows($dbSelect = null) {
 		$db = Zend_Registry::get('dbAdapter');
 		if (is_null($dbSelect)) {
-                	$dbSelect = $db->select()
-				->from(array('f'=>$this->_table))
-				->join(array('hbm24'=>'chmed.basemed24'),'hbm24.full_ndc = f.fullNDC',array('fda_drugname','chmed_dose'=>'dose','strength','rxnorm','tradename'));
+            $dbSelect = $db->select()
+                ->from(array('f'=>$this->_table))
+                ->join(array('hbm24'=>'basemed24'),'hbm24.full_ndc = f.fullNDC',array('fda_drugname', 'dose', 'strength', 'rxnorm', 'tradename'));
 		}
 		return $db->query($dbSelect)->fetchAll();
 	}

@@ -181,8 +181,6 @@ class PatientRemindersController extends WebVista_Controller_Action {
 	}
 
 	public function filterMedicationsAction() {
-		$this->view->chBaseMed24Url = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24Url;
-		$this->view->chBaseMed24DetailUrl = Zend_Registry::get('config')->healthcloud->CHMED->chBaseMed24DetailUrl;
 		$operators = array(''=>'');
 		foreach (Claim::balanceOperators() as $key=>$value) {
 			$operators[$key] = $value;
